@@ -91,18 +91,18 @@ STEP 8 — (Future) Real interview replaces simulated tier
 | 0. Desk research | Done — 8 sources logged | Done — 3 source entries logged |
 | 1. Persona | Done | Done |
 | 2. Journey | Done | Done |
-| 3. Opportunity cards | 3 cards | 1 card |
-| 4. Workflow diagrams | 1 (pest/disease triage) | 0 — not yet checked whether the sale-timing card needs one |
-| 5. Matrix | Done | **Missing — being added now** |
+| 3. Opportunity cards | 3 cards | 2 cards |
+| 4. Workflow diagrams | 1 (pest/disease triage) | 0 — checked for both cards; neither needs one (both are standing views/background estimates, not event-triggered cases) |
+| 5. Matrix | Done | Done |
 | 6. Simulated interview | Done (01) | Done (01) |
-| 7. Feedback | Done | Done for the one existing card |
+| 7. Feedback | Done | Done |
 
-Livestock is behind horticulture on Steps 3-5, not because the persona is
-less important, but because horticulture was built first and had two full
-passes (initial + simulated-interview follow-up) before livestock existed.
-Bringing livestock to the same step-count as horticulture is the immediate
-priority before starting any third persona — see the update this file's
-own addition triggered in `matrix/livestock-opportunity-matrix.md`.
+Livestock is now at the same step-count as horticulture (this file's own
+gap analysis triggered `matrix/livestock-opportunity-matrix.md` and
+`opportunities/livestock-feed-position-tracking.md`), though with one
+fewer opportunity card overall and a materially thinner desk-research base
+(3 vs. 8 sources). Closing that source-count gap, or starting a third
+persona, are the two live options rather than a forced next step.
 
 ## What this flow does NOT include (yet)
 

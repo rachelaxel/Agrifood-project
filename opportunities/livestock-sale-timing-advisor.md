@@ -99,13 +99,18 @@ address adjacent pasture/feed-budgeting decision support, so there may be
 existing products to learn from (or partner with) rather than building
 from zero.
 
-**Related opportunity (not yet its own card)**: the simulated interview
-suggests the sale-timing decision and a feed-availability/procurement
-decision may not be separable in practice — the grazier reported holding
-both in his head simultaneously and losing track of one while working the
-other. If a real interview confirms this, the scope of this card may need
-to expand to include feed-position data directly rather than assuming
-sale-timing is a standalone decision.
+**Related opportunity**: the simulated interview suggests the sale-timing
+decision and a feed-availability/procurement decision may not be
+separable in practice — the grazier reported holding both in his head
+simultaneously and losing track of one while working the other. Rather
+than expanding this card's own scope, that gap now has its own card —
+`opportunities/livestock-feed-position-tracking.md` — designed as an
+enabling input into this one (the same "infrastructure card feeds the
+higher-value card" pattern as horticulture's observation-capture card
+feeding its plan-operationalisation and pest-detection cards). If a real
+interview confirms the entanglement, this card's AI intervention should
+explicitly consume that card's feed-position estimate rather than treating
+feed availability as an external unknown.
 
 **Sources**: ABARES Financial performance of livestock farms (income
 volatility grounding the stakes claim); commercial grazing tools as
