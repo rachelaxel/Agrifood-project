@@ -9,11 +9,21 @@ rolled up into a single cross-commodity matrix.
 
 | Opportunity | Journey stage | Farmer value | AI potential | Workflow complexity | Adoption likelihood | Priority |
 |---|---|---|---|---|---|---|
+| Structured observation capture (from existing photos) | Monitor conditions | Medium on its own; high as enabling infrastructure for the two rows below | Low-medium (tagging/organisation, not novel prediction) | Very low (background service, no case logic) | High — builds on an already-existing habit rather than asking for a new one (simulated-interview signal) | ⭐⭐⭐ |
 | Season plan operationalisation | Plan → Monitor | Very high — targets the project's core named adoption gap | Medium (mostly summarisation/scheduling, not novel prediction) | Low (no branching logic needed for the baseline case) | Medium — depends on agronomists producing structured-enough plans | ⭐⭐⭐ |
 | Predictive pest/disease detection & triage | Monitor → Decide | High | High | Medium (confidence-based escalation, agronomist queue management) | Medium — hinges on trust in automated diagnosis and fit with existing agronomist relationship | ⭐⭐⭐ |
 
 ## Reading this matrix
 
+- **Structured observation capture** is the newest and lowest-complexity
+  card, added after a simulated interview surfaced that growers may
+  already be taking phone photos on the walk with nowhere for them to go
+  (see `research/interviews/horticulture-simulated-01.md` — not confirmed).
+  It scores highest on adoption likelihood specifically because it asks
+  for no new behaviour, and is plausibly a prerequisite for the other two
+  cards rather than a competitor to them, since both depend on
+  block-specific historical data this opportunity would generate as a
+  byproduct.
 - **Season plan operationalisation** scores highest on farmer value because
   it directly addresses the named adoption gap from the source thesis, and
   lowest on workflow complexity because the baseline version needs no
@@ -28,11 +38,11 @@ rolled up into a single cross-commodity matrix.
 
 ## Gaps in this matrix (to fill before it's useful for real prioritisation)
 
-- Only 2 opportunity cards exist for this persona so far. The friction
+- Only 3 opportunity cards exist for this persona so far. The friction
   table in `journeys/horticulture-tree-crop-journey.md` names several more
   unaddressed friction points (input procurement, labour/equipment,
-  harvest timing, finance/compliance paperwork, output/market timing) that
-  don't yet have opportunity cards.
+  harvest timing, finance/compliance paperwork, per-crop output/market
+  timing) that don't yet have opportunity cards.
 - No cross-commodity comparison yet — this matrix only covers one of the
   five target personas listed in `README.md`.
 - Scores are unvalidated judgement calls, not derived from interviews or a

@@ -33,7 +33,13 @@ high-impact cases; retains final authority on treatment decisions.
 risk — a wrong call on pest ID could mean real crop loss. Also: does this
 replace or route around the agronomist relationship, which the persona
 treats as the most trusted information source (QUT finding, see
-`research/sources.md`)?
+`research/sources.md`)? **Simulated-interview signal** (see
+`research/interviews/horticulture-simulated-01.md`, not confirmed): the
+simulated grower named block-specific history — specifically a known
+salinity issue in one block — almost unprompted as the thing that would
+make her trust or distrust a recommendation, reinforcing that
+"block-specific, not regional" isn't just a nice-to-have but the core
+trust condition for this opportunity.
 
 **Adoption mechanism — farmer**: Explainable recommendation with a visible
 confidence score; automatic escalation to the human agronomist below a

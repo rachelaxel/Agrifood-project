@@ -57,6 +57,14 @@ SELL/OUTPUT
   - Output goes to a packing shed/marketer against quality specs;
     `[VALIDATE]` grower's visibility into market timing and price at point
     of sale.
+    **Simulated-interview signal** (see
+    `research/interviews/horticulture-simulated-01.md`, not confirmed): on
+    a multi-crop property, market visibility may differ *per crop* —
+    the simulated grower's almonds went through a pooling arrangement with
+    price known only after the fact, while her citrus went through a
+    packer on more immediate spec-and-price terms. If confirmed, this
+    stage may need a per-crop split rather than one grower-level answer,
+    echoing the ABARES multi-crop finding already noted for this persona.
   ↓
 MANAGE FINANCE/COMPLIANCE
   - Compliance records for chemical use and QA schemes (e.g. Freshcare/
@@ -82,11 +90,12 @@ yet mapped — `[VALIDATE]` in interviews.
 
 | Journey stage | Farmer problem | Current behaviour |
 |---|---|---|
-| Monitor conditions | No structured record of what was observed; season-over-season comparison depends on memory | Daily walk, no logging beyond memory or occasional paper/phone note |
+| Monitor conditions | No structured record of what was observed; season-over-season comparison depends on memory | Daily walk, no logging beyond memory or occasional paper/phone note. **Simulated signal** (see `research/interviews/horticulture-simulated-01.md`, not confirmed): grower already takes phone-camera photos on the walk "for my own memory," but they accumulate unused in her camera roll — an existing habit going to waste, not an absence of any capture behaviour at all |
 | Monitor → Decide | Deciding whether a deviation is urgent enough to call the agronomist, with no baseline to check against | Informal triage from experience; call agronomist or wait |
-| Decide (synthesis) | Too many disparate information sources (weather, visual inspection, past experience) to combine into a clear read | Phone call to agronomist functions as the de facto synthesis step (QUT finding, see `research/sources.md`) |
-| Plan → Monitor (handoff) | Agronomist's plan is a document/verbal summary that never resurfaces during the daily walk/decision routine | Grower relies on memory to track whether they're "on plan"; follow-through is inconsistent, not from disagreement but lack of a trigger |
-| Manage finance/compliance | Compliance records (chemical use, QA schemes) are manual paperwork, disconnected from the daily observation that could have generated them | Reconciled after the fact, separately from the walk |
+| Decide (synthesis) | Too many disparate information sources (weather, visual inspection, past experience) to combine into a clear read | Phone call to agronomist functions as the de facto synthesis step (QUT finding, see `research/sources.md`). **Simulated signal** (not confirmed): grower named specifically a weather app, a separate regional pest-alert app, and her own walk as disconnected sources — the pest-alert app doesn't prompt her to check at the relevant moment, so synthesis burden sits entirely with her |
+| Plan → Monitor (handoff) | Agronomist's plan is a document/verbal summary that never resurfaces during the daily walk/decision routine | Grower relies on memory to track whether they're "on plan"; follow-through is inconsistent, not from disagreement but lack of a trigger. **Simulated signal** (not confirmed): the plan itself *was* a proper written document from the agronomist — the specific failure was a recommended action with no date/window trigger attached, so it "kept sliding" with no single moment it became urgent |
+| Manage finance/compliance | Compliance records (chemical use, QA schemes) are manual paperwork, disconnected from the daily observation that could have generated them | Reconciled after the fact, separately from the walk. **Simulated signal** (not confirmed): records were kept promptly (within a day or two) on an agronomist-provided template, and occasionally got reused informally to check "what did we spray and when" — compliance records may already function as a partial troubleshooting log, just not by design |
+| Sell/output (multi-crop) | Market visibility may differ by crop on the same property, not be one uniform answer | **Simulated signal** (not confirmed): almonds sold via pooling (price known only after the fact) vs. citrus sold via packer on immediate spec/price — see the SELL/OUTPUT journey-spine note above |
 | Review & plan next season | No systematic link between what was recommended, what was actually done, and the season's outcome | Informal, subjective review; learning is tacit and slow |
 
 This table intentionally names problems and current behaviour only — it's

@@ -17,7 +17,16 @@ adoption gap identified in the source thesis for this project.
 **Current behaviour** (hypothesised — `[VALIDATE]`): Plan is set at a
 scheduled agronomist visit; grower carries it forward from memory (or an
 occasional re-read of notes) with no structured prompting during the
-season.
+season. **Simulated-interview signal** (see
+`research/interviews/horticulture-simulated-01.md`, Simulated/synthetic
+tier, not confirmed): the plan itself was a proper written document from
+the agronomist — the actual failure mode was one specific recommendation
+(a soil amendment) with no date/window attached, so it had no moment it
+became urgent and "kept sliding." This is a sharper, more actionable
+version of the problem than "no plan resurfaces at all": the fix may be
+as narrow as attaching a trigger date to each discrete action in an
+otherwise perfectly good plan, not rebuilding how the whole plan is
+communicated.
 
 **AI intervention**: *Summarise* + *coordinate* + *interact
 conversationally*. Convert the agronomist's plan into a small number of
@@ -75,4 +84,6 @@ script — see next steps below.
 founding thesis (see conversation context in git history of `README.md`);
 no external source yet directly validates the check-in mechanism itself —
 flagged `[VALIDATE]` until tested against a real agronomist plan and grower
-reaction.
+reaction. The date/window-trigger sharpening above comes from a simulated
+interview only (see `research/interviews/horticulture-simulated-01.md`) —
+below secondary/commentary confidence, a hypothesis to confirm.

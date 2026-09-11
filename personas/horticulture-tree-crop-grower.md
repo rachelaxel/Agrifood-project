@@ -62,12 +62,31 @@
    Freshcare or SQF). `[VALIDATE]` — this is the single highest-value thing
    to confirm, since it determines whether there's any existing structured
    data to build on.
+   **Simulated-interview signal** (see
+   `research/interviews/horticulture-simulated-01.md`, Simulated/synthetic
+   tier, not confirmed): the simulated grower already takes phone-camera
+   photos on the walk "more for my own memory than anything," but they
+   just accumulate in her camera roll unused — a more specific and
+   actionable version of this `[VALIDATE]` tag than assuming "nothing
+   beyond memory." Chemical-use compliance records were kept properly and
+   promptly (within a day or two) on a spreadsheet template the agronomist
+   provided, and occasionally got reused informally to check "what did we
+   spray and when" — i.e. compliance records may already double as a
+   partial troubleshooting record, just not by design.
 5. **Agronomist visit (periodic)** — walks the block with the grower,
    diagnoses issues, leaves a written or verbal plan (nutrition program,
    spray schedule, irrigation recommendation). The grower's actual
    follow-through on this plan is inconsistent — not from disagreement, but
    because the plan doesn't map cleanly onto the grower's day-to-day
    decision loop above.
+   **Simulated-interview signal** (not confirmed): the season program
+   itself *was* a proper written document from the agronomist, set months
+   ahead — the gap wasn't "no plan exists," it was a specific recommended
+   action (a soil amendment) that "kept sliding" because it had no trigger
+   tied to a specific day, not because of disagreement or forgetting the
+   plan existed. This sharpens the plan-operationalisation opportunity
+   toward date/window-based triggers specifically, not just periodic
+   reminders — see `opportunities/horticulture-plan-operationalisation.md`.
 6. **End-of-season review** — informal, often just "did this block perform
    well or not," rarely tied back systematically to what was recommended vs.
    what was actually done.
@@ -112,7 +131,11 @@ reactive/tactical on day-to-day inputs (irrigation, spray timing).
 ## Trust triggers
 
 - A system that references the *specific block's* history, not a generic
-  regional model.
+  regional model. **Simulated-interview signal** (see
+  `research/interviews/horticulture-simulated-01.md`, not confirmed): the
+  simulated grower named this almost verbatim unprompted, specifically
+  citing a known salinity issue in one block as the kind of history a
+  generic system wouldn't know.
 - Being shown the "why" behind a recommendation in observational terms
   (matches what a good agronomist would say on a walk), not a black-box
   score.
@@ -128,6 +151,12 @@ reactive/tactical on day-to-day inputs (irrigation, spray timing).
 
 - Generic advice that ignores known block-level variation.
 - Anything that reads as "another platform to log into and enter data."
+  **Simulated-interview signal** (not confirmed): the simulated grower
+  described a two-season abandoned soil-moisture-probe system — data was
+  fine, but it lived in "its own app that nobody checked unless something
+  had already gone wrong," and setting alert thresholds took more time
+  than either owner had to give it. Consistent with, not independent
+  proof of, this rejection trigger.
 - Recommendations that don't map to an achievable action given current
   cash-flow/labour constraints — i.e., ignoring the economics.
 - Loss of control/authorship over the decision — being told what to do
