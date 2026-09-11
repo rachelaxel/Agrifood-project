@@ -46,6 +46,13 @@
    coordinator, sometimes the agronomist for a quick check. `[VALIDATE]`
    whether this happens before or after the walk, and how many calls/day is
    typical.
+   Adjacent finding worth testing directly: a QUT case study of a Darling
+   Downs cotton farm found farmers rated **agronomists as their most
+   trusted information source**, ahead of tech vendors or dashboards, and
+   that both farmers and agronomists reported being "drowning in apps and
+   data" with no good way to combine disparate sources into something
+   actionable (QUT, see `research/sources.md`) — i.e. the phone call to the
+   agronomist may function as the grower's actual synthesis step today.
 3. **Reactive decisions** — irrigation scheduling adjustments, spot spraying,
    labour allocation for the day, based on what was observed that morning
    plus a mental model of the season so far.
@@ -112,7 +119,10 @@ reactive/tactical on day-to-day inputs (irrigation, spray timing).
 - Low time cost to interact — ideally fits inside the existing walk/phone
   routine rather than requiring a new app session.
 - Endorsement or use by their existing agronomist, rather than being sold as
-  a replacement for that relationship.
+  a replacement for that relationship — grounded, not just hypothesised:
+  agronomists were the single most trusted information source in the QUT
+  Darling Downs study (see `research/sources.md`), so a system positioned
+  as competing with that relationship starts from a trust deficit.
 
 ## Rejection triggers
 
@@ -158,7 +168,11 @@ data-science language without a concrete action attached.
   capability/capacity, and **return on investment** (AgriFutures Producer
   Technology Uptake Program, see `research/sources.md`) — supporting the
   README's insistence that economics modelling is core to this project, not
-  a bolt-on.
+  a bolt-on. Corroborated globally: McKinsey's global farmer survey finds
+  unclear ROI and high implementation/maintenance cost are the top-cited
+  agtech adoption barriers (North America: 52% cite cost, 40% cite unclear
+  ROI), with ease-of-use and data-sharing trust as secondary barriers (see
+  `research/sources.md`).
 
 ## Where the agronomist gets involved
 

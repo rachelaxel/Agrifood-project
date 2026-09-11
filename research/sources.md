@@ -35,14 +35,46 @@ Confidence key:
   behavioural/trust problem, not just a technology-availability problem —
   consistent with the source conversation's thesis.
 
-- **QUT Centre for AgTech — "A Case Study of Human Factors of Digital
-  AgTech Adoption"**
-  [research.qut.edu.au (PDF)](https://research.qut.edu.au/cab/wp-content/uploads/sites/364/2024/09/Report-CP-digital-AgTech-Case-Study-FINAL-TO-PUBLISH62.pdf)
-  — *Primary/qualitative.* Case study on human factors in digital agtech
-  adoption. **Not yet read in full — flagged as a priority follow-up read**
-  since it looks like the closest existing analogue to the persona/workflow
-  interviews the README proposes running from scratch (task #7: don't
-  start from zero if this exists already).
+- **QUT Centre for Agriculture and the Bioeconomy — "A Case Study of Human
+  Factors of Digital AgTech Adoption: Condamine Plains, Darling Downs"**
+  [QUT ePrints record](https://eprints.qut.edu.au/227177/),
+  [full PDF](https://research.qut.edu.au/cab/wp-content/uploads/sites/364/2024/09/Report-CP-digital-AgTech-Case-Study-FINAL-TO-PUBLISH62.pdf)
+  (PDF and eprints domain both blocked by this session's network egress
+  proxy — findings below are reconstructed from search-indexed excerpts,
+  not a full read; re-pull directly once network access allows).
+  — *Primary/qualitative.* Qualitative case study of a cotton farm in
+  Condamine Plains (Darling Downs, QLD) adopting Wi-Fi/LoRaWAN
+  connectivity, water and crop sensors, moisture probes, and satellite
+  imagery. Took an **ecosystem approach** — interviewing not just the
+  farmer but agronomists, technology providers, and suppliers — to
+  understand how community-level dynamics enable or constrain on-farm
+  adoption, not just individual farmer traits. Companion paper: "Critical
+  factors of digital AgTech adoption on Australian farms: from digital to
+  data divide," *Information, Communication & Society* Vol 25 No 6 (2022),
+  [tandfonline.com](https://www.tandfonline.com/doi/full/10.1080/1369118X.2022.2056712).
+  **Key findings directly relevant to this project's personas:**
+  - Coined the **"data divide"**: a capability gap between technology
+    providers supplying devices/software that generate data, and farmers'
+    ability to manage, implement, use, and maintain those tools
+    independently. This is a sharper, evidenced version of this project's
+    own working hypothesis that "the issue isn't information, it's
+    operationalising it" — reframe as: the issue is a data-generation-to-
+    data-use capability gap, not raw data availability.
+  - **Agronomists were rated the most trusted information source** by
+    surveyed farmers, ahead of technology vendors or generic data
+    dashboards — attributed to deep regional expertise, local ties, and
+    ability to tailor advice to the specific farm. Directly supports this
+    project's "AI extends the agronomist" framing (README task #6) over
+    an "AI replaces the agronomist" framing.
+  - Farmers and their agronomists reported being **"drowning in apps and
+    data,"** with no good way to combine disparate datasets into something
+    actionable — i.e. the bottleneck observed in the field is synthesis,
+    not collection. One agronomist, on why growers don't adopt more: *"I
+    don't think they [growers] understand what is available to them."*
+    That's a trust/awareness-stage barrier (stage 1-2 in this project's
+    adoption model in `README.md`), distinct from the economic-fit barrier
+    at later stages — worth keeping these separate in any persona rather
+    than lumping all "won't adopt" reasons together.
 
 - **"Technology Acceptance, Adoption and Workforce on Australian Cotton
   Farms"** (MDPI *Agriculture*, 2022)
@@ -62,6 +94,24 @@ Confidence key:
   divide to a data divide" (gap between data generation and data use on
   farm) recur across multiple sources — worth testing directly in grower
   interviews rather than taking as given.
+
+- **McKinsey — "Agtech: Breaking down the farmer adoption dilemma"** (global
+  farmer survey, most recently 2024 edition — "Voice of the Global Farmer")
+  [mckinsey.com](https://www.mckinsey.com/industries/agriculture/our-insights/agtech-breaking-down-the-farmer-adoption-dilemma),
+  [PDF](https://www.mckinsey.com/~/media/mckinsey/industries/agriculture/our%20insights/agtech%20breaking%20down%20the%20farmer%20adoption%20dilemma/agtech-breaking-down-the-farmer-adoption-dilemma.pdf)
+  — *Primary/quantitative, global (not Australia-specific — use for
+  corroboration/pattern-matching, not as an AU-specific figure).* Surveyed
+  farmers globally name **unclear ROI and high implementation/maintenance
+  cost** as the top pain points for agtech adoption (North America: 52%
+  cite high cost, 40% cite unclear ROI as biggest barriers). Also names
+  **ease of use** and **data-sharing trust** as recurring barriers. Global
+  adoption is uneven: Europe/North America ~61% using or planning to adopt
+  at least one agtech product within two years, vs. ~9% in Asia. Recommends
+  agtech vendors lead with **personalisation and science-backed,
+  measurable ROI/KPIs** to build trust — directly corroborates both the
+  AgriFutures PTUP finding above (ROI as a top-three barrier) and this
+  project's core thesis that economics has been under-weighted relative to
+  the technology pitch.
 
 ---
 
@@ -103,14 +153,28 @@ Confidence key:
   [horticulture.com.au/AL16001](https://www.horticulture.com.au/growers/help-your-business-grow/research-reports-publications-fact-sheets-and-more/al16001/),
   [AL19001](https://www.horticulture.com.au/growers/help-your-business-grow/research-reports-publications-fact-sheets-and-more/al19001),
   [AL22001](https://www.horticulture.com.au/growers/help-your-business-grow/research-reports-publications-fact-sheets-and-more/al22001/)
+  (site blocked by this session's network egress proxy — content below is
+  from search-indexed summaries, not the primary pages; re-pull directly
+  once network access allows).
   — *Program/industry.* Multi-phase, ongoing levy-funded program
   specifically about **adoption** of R&D into almond growing practice
   (irrigation, pollination, pest/disease, food safety, spray application,
-  biosecurity, new production systems). This is a direct precedent for the
-  README's task #7 (connect to existing RDC research before starting from
-  scratch) — these program reports likely already contain grower
-  interview/survey data relevant to the persona's pain points and
-  decision-making sections. **Not yet read — priority follow-up.**
+  biosecurity, new production systems), run 2020-2023 (AL19001 phase) by a
+  small industry development team with established grower networks.
+  Delivered mostly via extension/communication channels rather than
+  research per se: grower notices and factsheets on seasonal issues, a
+  grower survey, and an industry-wide investigation into **bud dieback on
+  the Monterey variety** (a concrete example of a real, specific,
+  block/variety-level production issue the industry considered important
+  enough to survey growers on — a good candidate scenario to build a
+  persona interaction around). The program model itself — human industry
+  development officers translating R&D into grower-facing advice via
+  regular short-form updates — is effectively the human-only version of
+  the "operational assistant" this project is exploring replacing/
+  augmenting with AI; worth treating this program's own before/after
+  adoption data (if published) as a natural baseline. **Grower-level
+  survey results themselves not yet located — still a priority follow-up**
+  once direct site access is available.
 
 - **Hort Innovation — National Tree Crop Intensification Program (AS18000)**
   [horticulture.com.au/AS18000](https://www.horticulture.com.au/growers/help-your-business-grow/research-reports-publications-fact-sheets-and-more/as18000/),
@@ -127,16 +191,19 @@ Confidence key:
 
 ## Priority follow-ups (not yet done)
 
-1. Read the QUT human-factors AgTech case study in full and extract any
-   direct grower quotes/behavioural findings into the persona file,
-   replacing `[VALIDATE]` tags with citations where they match.
+1. ~~Read the QUT human-factors AgTech case study~~ — done via
+   search-indexed excerpts (see entry above); direct PDF/eprints access is
+   blocked by this session's network proxy, so **re-pull the full document
+   directly** once that's available to confirm the excerpts above and look
+   for additional direct grower quotes.
 2. Pull current (not 2014-15) ABARES horticulture farm income/cost figures
    for the "farm economics snapshot" section — ideally split by almonds,
    citrus, and wine grapes separately rather than the "irrigated
    horticulture" aggregate used above.
-3. Locate and skim at least one Hort Innovation almond adoption program
-   final report (AL16001 or AL19001) for grower-level qualitative findings.
-4. Find the primary Darling Downs cotton digital-agtech case study
-   directly (currently only known via secondary summary) and assess
-   whether its interview methodology is reusable for this project's own
-   grower interviews (README task #1).
+3. Get direct access to horticulture.com.au (blocked this session) to pull
+   the actual AL16001/AL19001 grower survey results and bud-dieback
+   investigation findings, rather than relying on search-indexed summaries.
+4. The Darling Downs cotton study's interview/ecosystem methodology
+   (interviewing agronomists and suppliers alongside farmers, not just
+   farmers) looks directly reusable for this project's own grower
+   interviews (README task #1) — reflected in `research/interview-guide.md`.
