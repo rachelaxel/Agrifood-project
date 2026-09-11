@@ -150,6 +150,35 @@
   @media (max-width:520px){ .two-col{grid-template-columns:1fr;} }
   .modal-source{margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:.79rem; color:var(--muted);}
 
+  /* ---------- Interview ---------- */
+  .interview-wrap{border:1px solid var(--border); background:var(--surface); border-radius:16px; padding:22px 24px; margin-top:18px; box-shadow:var(--shadow); border-top:4px solid var(--tab-accent, var(--accent-hort));}
+  .interview-banner{display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono'; font-size:.74rem; color:var(--flag); background:var(--flag-tint); border:1px solid color-mix(in srgb, var(--flag) 35%, transparent); border-radius:8px; padding:8px 12px; margin-bottom:16px;}
+  .question-bank{display:flex; flex-direction:column; gap:12px; margin-bottom:18px;}
+  .qb-group{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .qb-group-label{font-size:.72rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); flex:0 0 100%; margin-bottom:2px;}
+  .qb-chip{font-size:.82rem; padding:7px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); color:var(--ink-2); cursor:pointer; text-align:left;}
+  .qb-chip:hover{border-color:var(--tab-accent, var(--accent-hort));}
+  .qb-chip:disabled{opacity:.5; cursor:not-allowed;}
+  .chat-log{display:flex; flex-direction:column; gap:14px; max-height:420px; overflow-y:auto; padding:4px 2px 8px; margin-bottom:14px;}
+  .chat-empty{color:var(--muted); font-size:.88rem; font-style:italic; padding:8px 2px;}
+  .chat-row{display:flex; gap:10px; max-width:88%;}
+  .chat-row.me{align-self:flex-end; flex-direction:row-reverse;}
+  .chat-avatar{width:30px; height:30px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono'; font-size:.68rem; font-weight:600; color:#fff; background:var(--ink-2);}
+  .chat-row.me .chat-avatar{background:var(--tab-accent, var(--accent-hort));}
+  .chat-bubble{background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:10px 14px; font-size:.9rem; color:var(--ink-2); line-height:1.5;}
+  .chat-row.me .chat-bubble{background:var(--tab-tint, var(--accent-hort-tint)); border-color:var(--tab-accent, var(--accent-hort)); color:var(--ink);}
+  .chat-bubble.thinking{color:var(--muted); font-style:italic;}
+  .interview-form{display:flex; gap:10px; align-items:flex-end;}
+  .interview-form textarea{flex:1; resize:vertical; min-height:44px; max-height:140px; border:1px solid var(--border); border-radius:10px; padding:10px 12px; font-family:inherit; font-size:.9rem; background:var(--surface); color:var(--ink);}
+  .interview-form textarea:focus{outline:2px solid var(--tab-accent, var(--accent-hort)); outline-offset:1px;}
+  .interview-send{background:var(--tab-accent, var(--accent-hort)); color:#fff; border:none; border-radius:10px; padding:11px 18px; font-size:.88rem; font-weight:600; cursor:pointer; flex:none;}
+  .interview-send:disabled{opacity:.55; cursor:not-allowed;}
+  .interview-foot{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:14px; flex-wrap:wrap;}
+  .interview-tools{display:flex; gap:10px;}
+  .ghost-btn{background:none; border:1px solid var(--border); border-radius:8px; padding:7px 12px; font-size:.8rem; color:var(--ink-2); cursor:pointer;}
+  .ghost-btn:disabled{opacity:.5; cursor:not-allowed;}
+  .interview-unavailable{color:var(--muted); font-size:.9rem; line-height:1.6;}
+
   /* ---------- Matrix ---------- */
   .matrix-wrap{border:1px solid var(--border); background:var(--surface); border-radius:16px; padding:24px 26px; margin-top:20px; box-shadow:var(--shadow);}
   .matrix-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;}
@@ -226,8 +255,17 @@
     <div class="opp-grid" id="oppGrid"></div>
   </section>
 
+  <section class="block" id="interviewSection">
+    <p class="eyebrow"><span class="step-n">4</span>Interview the persona</p>
+    <div class="section-head">
+      <h2>Ask <span id="interviewPersonaName"></span> directly</h2>
+      <p class="hint">A live, AI-run role-play grounded in everything on this page — the same method as <span class="mono">research/simulated-interview-methodology.md</span>. Use it to probe pain points and stress-test the persona; treat every answer as a hypothesis to confirm with a real grower, never as evidence on its own.</p>
+    </div>
+    <div class="interview-wrap" id="interviewWrap"></div>
+  </section>
+
   <section class="block" id="matrixSection">
-    <p class="eyebrow"><span class="step-n">4</span>Cross-commodity matrix</p>
+    <p class="eyebrow"><span class="step-n">5</span>Cross-commodity matrix</p>
     <div class="section-head">
       <h2>All five opportunities, one plot</h2>
       <p class="hint">Scores are first-pass judgement calls awaiting real interviews, not measured data.</p>
@@ -430,6 +468,38 @@
     {n:'7', t:'Feed back', d:'Annotate, never overwrite, earlier files'}
   ];
 
+  // Adapted from research/interview-guide.md — commodity-neutral, so the
+  // same bank works for every persona; stage-labelled entries reuse each
+  // persona's own journey-stage names at render time.
+  const QUESTION_BANK = [
+    {group:'Walk through yesterday', qs:[
+      'Talk me through yesterday, start to finish — what you did, what you noticed, who you spoke to.'
+    ]},
+    {group:'Plan', qs:[
+      'How far ahead do you actually plan? What’s written down versus just in your head?',
+      'What would make you deviate from the plan mid-season?'
+    ]},
+    {group:'Monitor & decide', qs:[
+      'What do you actually look at on a normal check, and in what order?',
+      'When something looks different than expected, what’s the first thing you do?',
+      'What was the last thing you decided on your own, without calling anyone?',
+      'What was the last piece of advice you were given that you didn’t follow through on — and why?'
+    ]},
+    {group:'Trust & rejection', qs:[
+      'What would it take for you to trust a system telling you something’s wrong, without seeing it yourself first?',
+      'Tell me about a piece of technology you tried and stopped using. What went wrong?'
+    ]},
+    {group:'Economics', qs:[
+      'What’s the real cost — time, money, hassle — of the way you do that today?',
+      'Whose time or money would a tool need to save to be worth adopting?'
+    ]}
+  ];
+
+  const INTERVIEW = {}; // per-persona: {turns, display, busy}
+  let sampleFn = null;
+  let downloadsFn = null;
+  let capabilitiesReady = false;
+
   // ---------------------------------------------------------------
   // STATE + RENDER
   // ---------------------------------------------------------------
@@ -583,6 +653,184 @@
   $('#modalBack').addEventListener('click', (e) => { if (e.target.id === 'modalBack') closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+  // ---------------- Interview the persona (live, via sample) ----------------
+  function ensureInterviewState(personaId){
+    if (!INTERVIEW[personaId]) INTERVIEW[personaId] = {turns:[], display:[], busy:false, error:null};
+    return INTERVIEW[personaId];
+  }
+
+  function buildPersonaBrief(p){
+    const journeyLines = p.journey.map(s => '- ' + s.label + ': ' + s.desc +
+      (s.friction.length ? ' Known friction: ' + s.friction.map(f=>f.problem).join(' ') : '')).join('\n');
+    return [
+      'You are role-playing, for research purposes, as an invented Australian ' + p.sub.toLowerCase() + ' — a "' + p.name + '" persona.',
+      'Stay fully in character and answer in first person, the way a real grower would speak in an interview: concrete, a little informal, 2-5 sentences per answer, no bullet points.',
+      'Base every answer on this research-grounded profile. Where the interviewer asks about something the profile does not cover, invent one plausible, specific, consistent detail rather than saying you don’t know — that is the point of this exercise — but never contradict the profile below.',
+      'Do not break character to mention you are an AI unless the interviewer directly asks "are you real" or similar — if asked, answer honestly in one short sentence, then continue in character if they keep going.',
+      '',
+      'PERSONA PROFILE',
+      'Commodity: ' + p.snapshot.commodity,
+      'Region: ' + p.snapshot.region,
+      'Structure: ' + p.snapshot.structure,
+      'Economics: ' + p.snapshot.economics,
+      'What would build trust in a new tool/advisor: ' + p.trust.join('; '),
+      'What would make you reject a new tool/advisor: ' + p.reject.join('; '),
+      'Your year, stage by stage:',
+      journeyLines,
+      '',
+      'Now answer the interviewer as this person.'
+    ].join('\n');
+  }
+
+  function renderInterview(){
+    const p = PERSONAS[currentPersona];
+    const st = ensureInterviewState(currentPersona);
+    $('#interviewPersonaName').textContent = p.name;
+    applyAccent($('#interviewSection'), p.accent);
+    const wrap = $('#interviewWrap');
+
+    if (capabilitiesReady && !sampleFn){
+      wrap.innerHTML = '<p class="interview-unavailable">Live interviews aren’t available in this view (the host hasn’t granted this page permission to ask Claude). You can still use the question bank below as a script — copy a question into <span class="mono">research/interview-guide.md</span> and run it with a real grower or in a fresh chat with Claude yourself.</p>' + renderQuestionBankHTML(true);
+      wireQuestionBank(null);
+      return;
+    }
+
+    const notReady = !capabilitiesReady;
+    const locked = st.busy || notReady;
+    wrap.innerHTML =
+      '<div class="interview-banner"><span class="ck-dot dashed" style="width:8px;height:8px;"></span>Simulated — generated live for this session, not a real grower. Nothing here is saved back to the project automatically.</div>' +
+      renderQuestionBankHTML(locked) +
+      '<div class="chat-log" id="chatLog"></div>' +
+      '<form class="interview-form" id="interviewForm">' +
+        '<textarea id="interviewInput" placeholder="Ask ' + p.name + ' a question, or pick one above…" ' + (locked?'disabled':'') + '></textarea>' +
+        '<button type="submit" class="interview-send" id="interviewSendBtn" ' + (locked?'disabled':'') + '>' + (notReady?'Loading…':st.busy?'Thinking…':'Ask') + '</button>' +
+      '</form>' +
+      '<div class="interview-foot">' +
+        '<span class="hint" style="margin:0;">' + st.display.filter(m=>m.role==='user').length + ' question' + (st.display.filter(m=>m.role==='user').length===1?'':'s') + ' asked this session</span>' +
+        '<div class="interview-tools">' +
+          '<button class="ghost-btn" id="resetInterviewBtn" ' + (st.display.length===0?'disabled':'') + '>Reset</button>' +
+          '<button class="ghost-btn" id="downloadInterviewBtn" ' + (st.display.length===0 || !downloadsFn?'disabled':'') + '>Download transcript</button>' +
+        '</div>' +
+      '</div>';
+
+    renderChatLog();
+    wireQuestionBank(sendQuestion);
+    $('#interviewForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ta = $('#interviewInput');
+      const text = ta.value.trim();
+      if (!text || st.busy) return;
+      ta.value = '';
+      sendQuestion(text);
+    });
+    $('#resetInterviewBtn').addEventListener('click', () => {
+      INTERVIEW[currentPersona] = {turns:[], display:[], busy:false, error:null};
+      renderInterview();
+    });
+    const dlBtn = $('#downloadInterviewBtn');
+    if (dlBtn) dlBtn.addEventListener('click', downloadTranscript);
+  }
+
+  function renderQuestionBankHTML(disabled){
+    return '<div class="question-bank">' + QUESTION_BANK.map(g =>
+      '<div class="qb-group"><span class="qb-group-label">' + g.group + '</span>' +
+      g.qs.map(q => '<button class="qb-chip" data-q="' + q.replace(/"/g,'&quot;') + '" ' + (disabled?'disabled':'') + '>' + q + '</button>').join('') +
+      '</div>'
+    ).join('') + '</div>';
+  }
+  function wireQuestionBank(onPick){
+    $all('.qb-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!onPick) return;
+        onPick(btn.getAttribute('data-q'));
+      });
+    });
+  }
+
+  function renderChatLog(){
+    const st = ensureInterviewState(currentPersona);
+    const log = $('#chatLog');
+    if (!log) return;
+    if (st.display.length === 0){
+      log.innerHTML = '<p class="chat-empty">No questions asked yet — try one from the list above, or type your own.</p>';
+      return;
+    }
+    log.innerHTML = st.display.map(m =>
+      '<div class="chat-row ' + (m.role==='user'?'me':'') + '">' +
+        '<div class="chat-avatar">' + (m.role==='user' ? 'You' : PERSONAS[currentPersona].name.split(' ')[0].slice(0,2).toUpperCase()) + '</div>' +
+        '<div class="chat-bubble' + (m.pending?' thinking':'') + '">' + (m.text || 'Thinking…') + '</div>' +
+      '</div>'
+    ).join('');
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function sendQuestion(text){
+    if (!sampleFn) return;
+    const personaId = currentPersona;
+    const st = ensureInterviewState(personaId);
+    if (st.busy) return;
+    const p = PERSONAS[personaId];
+
+    st.display.push({role:'user', text});
+    const apiContent = st.turns.length === 0 ? (buildPersonaBrief(p) + '\n\nInterviewer: ' + text) : text;
+    st.turns.push({role:'user', content:apiContent});
+    st.display.push({role:'assistant', text:'', pending:true});
+    st.busy = true;
+    renderInterview();
+
+    sampleFn(st.turns, {
+      modelTier:'quick',
+      cache:false,
+      onText:({text:whole}) => {
+        const last = st.display[st.display.length-1];
+        if (last && last.pending){ last.text = whole; renderChatLog(); }
+      }
+    }).then(res => {
+      st.turns.push({role:'assistant', content:res.text});
+      const last = st.display[st.display.length-1];
+      last.text = res.text; last.pending = false;
+      st.busy = false;
+      renderInterview();
+    }).catch(err => {
+      const last = st.display[st.display.length-1];
+      const copy = {
+        not_granted:'You declined (or this view can’t get) permission to ask Claude — use the question bank as a script instead.',
+        rate_limited:'Too many requests right now — wait a moment and try again.',
+        refused:'That question was declined — try rephrasing it.',
+        empty_completion:'No answer came back — try a shorter or more specific question.'
+      };
+      last.text = copy[err.code] || (err.text || 'Something went wrong asking that question — try again.');
+      last.pending = false;
+      st.busy = false;
+      st.error = err.code;
+      renderInterview();
+    });
+  }
+
+  function downloadTranscript(){
+    if (!downloadsFn) return;
+    const p = PERSONAS[currentPersona];
+    const st = ensureInterviewState(currentPersona);
+    const qas = [];
+    for (let i=0;i<st.display.length;i+=2){
+      const q = st.display[i], a = st.display[i+1];
+      if (q) qas.push('**Interviewer**: ' + q.text + '\n\n**' + p.name + '**: ' + (a ? a.text : ''));
+    }
+    const md = [
+      '# Simulated Interview: ' + p.name + ' (live, from Groundtruth)',
+      '',
+      '> ⚠️ SIMULATED INTERVIEW — NOT A REAL GROWER. Generated live via AI role-play in the Groundtruth platform, grounded in `personas/' + p.id + '*.md` and `journeys/' + p.id + '*.md`, per `research/simulated-interview-methodology.md`. Confidence tier: Simulated (synthetic) — below secondary/commentary in `research/sources.md`. Every claim below is a hypothesis to test in a real interview, not a finding.',
+      '',
+      'Generated: ' + new Date().toISOString(),
+      '',
+      '---',
+      '',
+      qas.join('\n\n---\n\n')
+    ].join('\n');
+    downloadsFn.save({filename: p.id + '-live-interview-' + Date.now() + '.md', data: md})
+      .catch(() => { /* declined or unavailable — no-op */ });
+  }
+
   // ---------------- Matrix chart ----------------
   function renderMatrixLegend(){
     const wrap = $('#matrixLegend');
@@ -669,6 +917,7 @@
     renderHero();
     renderSpine();
     renderOppGrid();
+    renderInterview();
   }
 
   renderAll();
@@ -676,5 +925,12 @@
   renderChart();
   renderMatrixTable();
   renderFlow();
+
+  // Resolve capabilities after first paint — never block render on them.
+  const useCap = (window.claude && window.claude.use) ? window.claude.use.bind(window.claude) : () => Promise.resolve(null);
+  Promise.all([useCap('sample'), useCap('downloads')]).then(([s, d]) => {
+    sampleFn = s; downloadsFn = d; capabilitiesReady = true;
+    renderInterview();
+  }).catch(() => { capabilitiesReady = true; renderInterview(); });
 })();
 </script>
