@@ -189,6 +189,62 @@ Confidence key:
 
 ---
 
+## Livestock (grazier) specific (used for the livestock persona)
+
+- **ABARES — Financial performance of livestock farms**
+  [agriculture.gov.au/abares/.../livestock](https://www.agriculture.gov.au/abares/research-topics/surveys/livestock),
+  reported via [Beef Central](https://www.beefcentral.com/news/red-ink-in-abares-latest-farm-cash-incomes-report/)
+  and [MLA](https://www.mla.com.au/news-and-events/industry-news/strong-financial-outlook-for-the-agricultural-industry/)
+  — *Primary/quantitative.* Drawn from ABARES' Australian Agricultural and
+  Grazing Industries Survey (broadacre farms with EVAO > $40,000). In
+  2022-23: **56,500 broadacre farms nationally, of which 22,100 specialist
+  beef, 8,900 specialist sheep, 3,000 mixed cattle/sheep.** Average farm
+  cash income for beef cattle producers in 2022-23 was **$238,000** (highest
+  in 7 years at the time), average equity ratio 94%, average farm cash debt
+  ~$570,000 against average liquid assets ~$247,000. Sheep producers had
+  the highest equity ratio of any surveyed farm type (95%) and lowest farm
+  business debt (~$329,000). Beef incomes then fell substantially in
+  2023-24 (drought, lower cattle prices) before recovering in 2024-25; the
+  3-year average to 2024-25 was just below the longer-term average of
+  $155,300 — i.e. **beef income is highly volatile year-to-year**, which
+  should directly shape the persona's risk appetite and cash-flow framing
+  (a very different economic rhythm to the more diversified horticulture
+  persona). Good current, credible anchor for the "farm economics
+  snapshot" section — a clear improvement over relying on 2014-15 figures
+  as with the horticulture persona.
+
+- **MLA (Meat & Livestock Australia) — Producer Adoption R&D / Digital
+  Agriculture programs**
+  [mla.com.au/producer-adoption](https://www.mla.com.au/research-and-development/producer-adoption/),
+  [mla.com.au/digital-agriculture](https://www.mla.com.au/research-and-development/digital-agriculture/)
+  — *Program/industry.* MLA's levy-funded producer adoption arm runs
+  Profitable Grazing Systems, Producer Demonstration Sites, EDGEnetwork,
+  Livestock Advisor Updates, and BeefUp/MeatUp forums — i.e. adoption
+  support here is delivered mostly through structured group
+  learning/extension, not one-on-one agronomist visits the way the
+  horticulture persona experiences it. This is a real, sourced difference
+  worth reflecting in the persona rather than assuming the same
+  agronomist-relationship model transfers across commodities. The Digital
+  Agriculture sub-program explicitly funds work on integrating multiple
+  data sources (livestock + pasture) to support profitability decisions —
+  same "too many disparate sources, no synthesis" pattern as the QUT
+  horticulture/cotton finding, worth testing whether it recurs here too.
+
+- **Commercial grazing decision-support tools** (secondary/commentary —
+  vendor sources, useful for what growers are being sold and what
+  behaviours they imply, not for adoption-rate claims): Grazing Charts
+  (RCS Australia), AgriWebb, Atlas Grazing, and Farming Forecaster all
+  pitch bringing pasture growth, livestock weight/movement, rainfall, and
+  feed budgeting into "one place" — the recurring vendor framing is
+  consolidating currently-scattered data sources into a single decision
+  view, which suggests (but doesn't prove) that graziers currently juggle
+  multiple disconnected tools/sources day to day, similar to the
+  horticulture persona's phone-and-memory pattern but with more
+  commercial software already in the mix. `[VALIDATE]` how much of this
+  is genuinely in use vs. aspirational vendor pitch.
+
+---
+
 ## Priority follow-ups (not yet done)
 
 1. ~~Read the QUT human-factors AgTech case study~~ — done via

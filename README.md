@@ -204,8 +204,13 @@ Claude to write some personas."
 
 1. **Horticulture grower** (perennial tree/vine crop) — prototype built, see
    `personas/horticulture-tree-crop-grower.md`.
-2. **Grain farmer** (broadacre) — not yet built.
-3. **Beef producer** — not yet built.
+2. **Livestock grazier** (beef/sheep) — prototype built, see
+   `personas/livestock-grazier.md`. Heavily `[VALIDATE]`-tagged pending
+   interviews; the biggest open structural question is whether this
+   persona has a single trusted advisor relationship the way horticulture
+   has its agronomist, or a more distributed model (vet/agent/group
+   extension) — see the persona and journey files.
+3. **Grain farmer** (broadacre) — not yet built.
 4. **Dairy farmer** — not yet built.
 5. **Cotton producer** — not yet built.
 
