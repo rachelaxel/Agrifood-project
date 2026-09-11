@@ -99,6 +99,10 @@ of what actually got used (and what didn't) sharpens the next round of
 personas, journeys, and opportunity cards. That feedback loop is what makes
 this a platform rather than a one-off ideation exercise.
 
+See `research/persona-build-flow.md` for the exact, ordered sequence of
+steps and file outputs used to build every persona so far — the layers
+below are the concept; that file is the checklist.
+
 ## Layer-by-layer: what each one is and produces
 
 ### 1. Farmer personas
