@@ -1,8 +1,10 @@
 # Workflow Map: Horticulture Tree-Crop Grower (Prototype)
 
 > **Status: Hypothesis draft**, companion to
-> `personas/horticulture-tree-crop-grower.md`. To be corrected against real
-> interviews before use in persona/scenario work downstream.
+> `personas/horticulture-tree-crop-grower.md`. Grounded where noted by
+> sources in `research/sources.md`, but the loop itself is not yet
+> interview-validated — to be corrected against real interviews before use
+> in persona/scenario work downstream.
 
 ## Purpose
 
@@ -104,8 +106,26 @@ agent to create value without asking the grower to change how they operate?**
    description of "a typical day."
 2. Check whether the loop differs meaningfully between the three candidate
    crops (almonds/citrus/wine grapes) before generalising this map across
-   "horticulture" — it may need to fork into crop-specific variants.
+   "horticulture" — it may need to fork into crop-specific variants. Note
+   ABARES data suggests many growers run more than one of these crops on
+   the same farm (see `research/sources.md`), so the loop may be shared
+   across blocks of different crops rather than being crop-specific at the
+   grower level.
 3. Once validated, use this map as the input to a scenario prototype (per
    README task #5) — e.g. simulate the grower saying "this block isn't
    performing like it normally does" and test the candidate AI roles above
    against that scenario.
+4. Read the Hort Innovation almond adoption program reports (AL16001/
+   AL19001/AL22001, see `research/sources.md`) — a multi-year, levy-funded
+   program specifically about getting growers to adopt R&D findings on
+   irrigation, pests/disease, spray application, etc. is a strong candidate
+   for real precedent on where this loop breaks down, without needing to
+   run fresh interviews first.
+
+## Sources
+
+See `research/sources.md`. Directly relevant here: ABARES irrigated
+horticulture / Murray-Darling Basin grape farm data (multi-crop pattern);
+Hort Innovation almond adoption program listings (candidate real-world
+precedent for the plan-handoff breakdown described above, not yet read in
+full).

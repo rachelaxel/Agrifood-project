@@ -1,23 +1,40 @@
 # Persona: Horticulture Tree-Crop Grower (Prototype)
 
-> **Status: Hypothesis draft.** Built from domain knowledge and the framing in
-> `README.md`, not yet validated against a real grower interview. Every claim
-> below should be tested and corrected against 2-3 actual interviews before
-> this is treated as reliable. Sections most likely to be wrong on first pass
-> are flagged inline with `[VALIDATE]`.
+> **Status: Hypothesis draft.** Built from domain knowledge, the framing in
+> `README.md`, and the sources logged in `research/sources.md`, but not yet
+> validated against a real grower interview. Every claim below should be
+> tested and corrected against 2-3 actual interviews before this is treated
+> as reliable. Sections still resting on domain-knowledge guesswork (no
+> external source behind them) are flagged inline with `[VALIDATE]`; sections
+> that now cite a source are grounded but still not interview-tested.
 
 ## Snapshot
 
 - **Commodity / production system**: perennial tree crop — almonds, citrus, or
   wine grapes (pick one region/crop for the pilot interviews; almonds in the
   Riverina/Sunraysia or citrus in the Riverland are reasonable starting points
-  given scale and existing agronomy support networks).
+  given scale and existing agronomy support networks). Almonds are a
+  reasonable pilot choice on current scale alone: national almond production
+  was valued at ~$1.3B in 2024-25, up 19.6% on the prior year (ABS, see
+  `research/sources.md`).
 - **Typical farm size**: family-owned, 50–500 ha under trellis/orchard, often
-  with a mix of owned and leased blocks of different ages.
+  with a mix of owned and leased blocks of different ages. `[VALIDATE]` —
+  no source pinned down yet for a typical hectare range specifically; ABARES
+  farm survey data (see sources log) should give an actual distribution
+  rather than this estimate.
 - **Region**: irrigated inland horticulture belt (MIA, Sunraysia, Riverland).
+- **Multi-crop reality**: don't assume a single-commodity grower — ABARES
+  data on the Murray-Darling Basin found ~86% of grape-growing farms carried
+  3+ crops, most commonly wine grapes + citrus + one other horticulture crop
+  (ABARES, 2014-15 figures — dated, but the diversification pattern itself
+  is a real finding worth testing directly rather than a guess). This
+  persona should probably be reframed as "irrigated tree/vine crop grower"
+  running more than one commodity, not a single-crop specialist.
 - **Structure**: owner-operator plus 1–3 permanent staff, seasonal labour at
   pruning/harvest, contracted agronomist (visits every 2–6 weeks depending on
   season), possible packing-shed/marketer relationship for output.
+  `[VALIDATE]` — staffing structure and visit cadence are still domain-
+  knowledge estimates, not sourced.
 
 ## A day in the life (hypothesised observation → decision → action loop)
 
@@ -113,18 +130,35 @@ agronomist would look for," concrete and observational.
 Alienates: "model confidence," "optimize," "platform," abstract
 data-science language without a concrete action attached.
 
-## Farm economics snapshot `[VALIDATE — needs real figures]`
+## Farm economics snapshot
 
+- **Grounded anchor (dated — needs refresh):** ABARES reported average farm
+  cash income for irrigated horticulture farms in the Murray-Darling Basin
+  at ~$105,800 in 2014-15, rising ~15% to ~$122,000 in 2015-16; only ~16% of
+  horticulture farms achieved a rate of return above 10% in 2015-16, and
+  those were mostly larger, multi-crop operations spanning citrus, wine
+  grapes, stone fruit, pome fruit and almonds (ABARES, see
+  `research/sources.md`). These figures are over a decade old — treat as an
+  order-of-magnitude anchor only, not a current number, and prioritise
+  pulling a recent ABARES horticulture survey release before this goes into
+  any real economics model.
 - Water is typically the largest controllable variable cost; margin is highly
-  sensitive to water price and allocation in a given season.
+  sensitive to water price and allocation in a given season. `[VALIDATE]` —
+  plausible from domain knowledge, not yet backed by a specific figure.
 - Labour (permanent + seasonal at harvest/pruning) is the second major cost
-  and a persistent availability risk.
+  and a persistent availability risk. `[VALIDATE]`
 - Cash-flow is highly seasonal (concentrated around harvest/sale), so any
   adoption cost incurred outside that window competes with tight off-season
-  cash.
+  cash. `[VALIDATE]`
 - Capital decisions (replant, irrigation upgrade) are financed over many
   years; the grower is used to thinking in multi-year payback, but day-to-day
-  tools need to justify themselves within a season.
+  tools need to justify themselves within a season. `[VALIDATE]`
+- The named top-three barriers to agtech adoption in Australia generally
+  (not horticulture-specific) are agritech performance, producer digital
+  capability/capacity, and **return on investment** (AgriFutures Producer
+  Technology Uptake Program, see `research/sources.md`) — supporting the
+  README's insistence that economics modelling is core to this project, not
+  a bolt-on.
 
 ## Where the agronomist gets involved
 
@@ -146,3 +180,15 @@ README task #6), not competing with it.
    block isn't performing like it normally does"?
 5. What's the real dollar/time cost of their current workflow that an AI
    layer would need to beat?
+
+## Sources
+
+See `research/sources.md` for full entries. Directly used here:
+AgriFutures Producer Technology Uptake Program (adoption barriers); ABARES
+horticulture farm survey program and Murray-Darling Basin grape farm data
+(farm economics, multi-crop diversification); ABS Australian Agriculture:
+Horticulture 2024-25 (almond sector scale). Hort Innovation's almond
+industry innovation and adoption program (AL16001/AL19001/AL22001) and the
+QUT human-factors AgTech case study are logged as priority follow-up reads
+— they likely contain grower-level qualitative findings that should replace
+several `[VALIDATE]` tags above once reviewed.

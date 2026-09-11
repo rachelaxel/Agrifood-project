@@ -153,3 +153,15 @@ product proposition → commercial case.
 /platform/            - the actual dynamic-platform product spec, once informed by
                          the above
 ```
+
+## Sourcing discipline
+
+Every persona, workflow map, and economics figure should trace back to a
+cited source or be explicitly flagged as an unvalidated hypothesis. All
+external sources found while researching this project are logged in
+`research/sources.md`, with a confidence rating (primary/quantitative,
+program/industry, or secondary/commentary) and notes on how each was used.
+Persona and workflow files should link back to that log rather than
+restating claims without attribution — this keeps it clear what's grounded
+in real research (RDC/AgriFutures/ABARES/ABS data, published studies) versus
+what still needs a grower interview to confirm.
