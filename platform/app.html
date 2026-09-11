@@ -1,0 +1,718 @@
+<title>Groundtruth</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#eef0e6;
+    --surface:#ffffff;
+    --surface-2:#f7f8f1;
+    --ink:#1f2a1e;
+    --ink-2:#3a4536;
+    --muted:#65705f;
+    --border:#d7dac8;
+    --border-strong:#b9bea6;
+    --accent-hort:#0891a0;
+    --accent-hort-ink:#065c66;
+    --accent-hort-tint:#dcf1f3;
+    --accent-live:#c1571e;
+    --accent-live-ink:#8a3d13;
+    --accent-live-tint:#f9e4d6;
+    --flag:#8a6a17;
+    --flag-tint:#f2e6c5;
+    --shadow:0 1px 2px rgba(30,40,25,.06), 0 6px 20px -8px rgba(30,40,25,.18);
+    --radius:10px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161a12;
+      --surface:#1e2418;
+      --surface-2:#232a1c;
+      --ink:#e9ebdd;
+      --ink-2:#c9cdb8;
+      --muted:#98a389;
+      --border:#333c29;
+      --border-strong:#48533a;
+      --accent-hort:#1d9aab;
+      --accent-hort-ink:#7fd7e2;
+      --accent-hort-tint:#12333a;
+      --accent-live:#d46b2a;
+      --accent-live-ink:#f0aa78;
+      --accent-live-tint:#3a2716;
+      --flag:#d1ad4c;
+      --flag-tint:#39301a;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#161a12;
+    --surface:#1e2418;
+    --surface-2:#232a1c;
+    --ink:#e9ebdd;
+    --ink-2:#c9cdb8;
+    --muted:#98a389;
+    --border:#333c29;
+    --border-strong:#48533a;
+    --accent-hort:#1d9aab;
+    --accent-hort-ink:#7fd7e2;
+    --accent-hort-tint:#12333a;
+    --accent-live:#d46b2a;
+    --accent-live-ink:#f0aa78;
+    --accent-live-tint:#3a2716;
+    --flag:#d1ad4c;
+    --flag-tint:#39301a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:'Source Sans 3', system-ui, sans-serif; line-height:1.5;}
+  h1,h2,h3,h4{font-family:'Source Serif 4', Georgia, serif; font-weight:600; text-wrap:balance; color:var(--ink); margin:0;}
+  .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+  a{color:var(--accent-hort-ink);}
+  button{font-family:inherit;}
+
+  .app{max-width:1180px; margin:0 auto; padding:0 20px; padding-block:28px 64px;}
+
+  /* ---------- Header ---------- */
+  .topbar{display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; justify-content:space-between; padding-bottom:22px; border-bottom:1px solid var(--border); margin-bottom:24px;}
+  .brand-eyebrow{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px;}
+  .brand h1{font-size:2.1rem; letter-spacing:-.01em;}
+  .brand p{margin:8px 0 0; max-width:52ch; color:var(--ink-2); font-size:.98rem;}
+  .confidence-key{display:flex; flex-wrap:wrap; gap:10px 16px; font-size:.78rem; color:var(--muted); max-width:360px;}
+  .confidence-key .ck-item{display:flex; align-items:center; gap:6px; white-space:nowrap;}
+  .ck-dot{width:9px; height:9px; border-radius:50%; flex:none; border:1.5px solid var(--border-strong); background:var(--surface-2);}
+  .ck-dot.solid{background:var(--ink-2); border-color:var(--ink-2);}
+  .ck-dot.ring{background:transparent; border-color:var(--ink-2);}
+  .ck-dot.dashed{background:transparent; border-style:dashed; border-color:var(--flag);}
+  .ck-dot.dotted{background:transparent; border-style:dotted; border-color:var(--muted);}
+
+  /* ---------- Layout ---------- */
+  .layout{display:grid; grid-template-columns:220px 1fr; gap:28px; align-items:start;}
+  @media (max-width:760px){ .layout{grid-template-columns:1fr;} }
+
+  .rail{position:sticky; top:20px; display:flex; flex-direction:column; gap:14px;}
+  @media (max-width:760px){ .rail{position:static;} }
+  .rail-label{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
+  .persona-tabs{display:flex; flex-direction:column; gap:8px;}
+  @media (max-width:760px){ .persona-tabs{flex-direction:row; flex-wrap:wrap;} }
+  .persona-tab{
+    text-align:left; border:1px solid var(--border); background:var(--surface);
+    border-radius:var(--radius); padding:12px 14px; cursor:pointer; display:flex; flex-direction:column; gap:4px;
+    transition:border-color .15s, background .15s;
+  }
+  .persona-tab:hover{border-color:var(--border-strong);}
+  .persona-tab .pt-name{font-weight:600; font-size:.95rem;}
+  .persona-tab .pt-sub{font-size:.76rem; color:var(--muted); line-height:1.3;}
+  .persona-tab[data-active="true"]{background:var(--tab-tint); border-color:var(--tab-accent); box-shadow:inset 0 0 0 1px var(--tab-accent);}
+  .persona-tab[data-active="true"] .pt-name{color:var(--tab-accent-ink);}
+  .rail-stat{border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:12px 14px;}
+  .rail-stat .rs-figure{font-family:'Source Serif 4'; font-size:1.5rem; font-variant-numeric:tabular-nums; line-height:1.1;}
+  .rail-stat .rs-label{font-size:.74rem; color:var(--muted); margin-top:4px;}
+
+  main.content{display:flex; flex-direction:column; gap:34px; min-width:0;}
+
+  /* ---------- Persona hero ---------- */
+  .persona-hero{border:1px solid var(--border); background:var(--surface); border-radius:14px; padding:22px 24px; box-shadow:var(--shadow);}
+  .ph-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:flex-start;}
+  .ph-top h2{font-size:1.4rem;}
+  .persona-pill{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; padding:4px 9px; border-radius:999px; color:#fff; background:var(--tab-accent);}
+  .ph-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:16px;}
+  .ph-field dt{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px;}
+  .ph-field dd{margin:0; font-size:.92rem; color:var(--ink-2);}
+  .trigger-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px;}
+  @media (max-width:560px){ .trigger-grid{grid-template-columns:1fr;} }
+  .trigger-box{border:1px solid var(--border); border-radius:8px; padding:12px 14px; background:var(--surface-2);}
+  .trigger-box h4{font-family:'Source Sans 3'; font-size:.78rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:700;}
+  .trigger-box ul{margin:8px 0 0; padding-left:18px; font-size:.86rem; color:var(--ink-2);}
+  .trigger-box li + li{margin-top:5px;}
+
+  /* ---------- Journey ---------- */
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .section-head h2{font-size:1.3rem;}
+  .section-head .hint{font-size:.82rem; color:var(--muted); max-width:46ch;}
+
+  .spine{display:flex; overflow-x:auto; gap:0; margin-top:16px; padding-bottom:6px; scrollbar-width:thin;}
+  .spine-node{flex:1 0 108px; display:flex; flex-direction:column; align-items:stretch; position:relative; min-width:108px;}
+  .spine-node .connector{position:absolute; top:17px; left:-50%; width:100%; height:2px; background:var(--border-strong); z-index:0;}
+  .spine-node:first-child .connector{display:none;}
+  .spine-btn{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:8px; background:none; border:none; cursor:pointer; padding:0 6px;}
+  .spine-num{width:34px; height:34px; border-radius:50%; border:2px solid var(--border-strong); background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono'; font-size:.75rem; color:var(--ink-2); flex:none;}
+  .spine-btn[aria-pressed="true"] .spine-num{border-color:var(--tab-accent); background:var(--tab-accent); color:#fff;}
+  .spine-node.has-friction .spine-num::after{content:''; position:absolute; width:8px; height:8px; border-radius:50%; background:var(--flag); border:1.5px solid var(--surface); transform:translate(11px,-11px);}
+  .spine-label{font-size:.76rem; text-align:center; color:var(--ink-2); font-weight:600; line-height:1.2;}
+
+  .stage-detail{margin-top:18px; border:1px solid var(--border); border-radius:12px; background:var(--surface); padding:20px 22px; box-shadow:var(--shadow);}
+  .stage-detail h3{font-size:1.05rem; margin-bottom:8px;}
+  .stage-detail > p.desc{color:var(--ink-2); font-size:.92rem; margin:0 0 14px;}
+  .friction-item{border-top:1px dashed var(--border); padding-top:14px; margin-top:14px;}
+  .friction-item:first-of-type{border-top:none; padding-top:0; margin-top:0;}
+  .fi-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:640px){ .fi-row{grid-template-columns:1fr;} }
+  .fi-label{font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px; display:flex; align-items:center; gap:6px;}
+  .fi-text{font-size:.88rem; color:var(--ink-2);}
+  .opp-link{display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-size:.8rem; font-weight:600; padding:5px 10px; border-radius:7px; border:1px solid var(--tab-accent); color:var(--tab-accent-ink); background:var(--tab-tint); cursor:pointer;}
+
+  /* ---------- Confidence tag ---------- */
+  .tag-confidence{display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--muted);}
+
+  /* ---------- Opportunity cards ---------- */
+  .opp-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px; margin-top:16px;}
+  .opp-card{border:1px solid var(--border); background:var(--surface); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; box-shadow:var(--shadow); cursor:pointer;}
+  .opp-card h3{font-size:1rem;}
+  .opp-card .oc-stage{font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono';}
+  .oc-tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .oc-tag{font-size:.7rem; padding:3px 8px; border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
+  .oc-problem{font-size:.85rem; color:var(--ink-2);}
+  .oc-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:8px; border-top:1px solid var(--border); font-size:.76rem;}
+  .maturity-chip{font-family:'IBM Plex Mono'; padding:2px 8px; border-radius:6px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
+  .stars{color:var(--tab-accent); letter-spacing:1px; font-size:.8rem;}
+
+  /* ---------- Modal ---------- */
+  .modal-back{position:fixed; inset:0; background:rgba(20,24,16,.5); display:none; align-items:flex-start; justify-content:center; padding:5vh 16px; z-index:50; overflow-y:auto;}
+  .modal-back[data-open="true"]{display:flex;}
+  .modal{background:var(--surface); border-radius:14px; max-width:680px; width:100%; padding:26px 28px 30px; box-shadow:0 24px 60px -12px rgba(0,0,0,.4); border:1px solid var(--border); margin-bottom:5vh;}
+  .modal-head{display:flex; justify-content:space-between; align-items:flex-start; gap:14px;}
+  .modal-head h3{font-size:1.25rem;}
+  .modal-close{border:none; background:var(--surface-2); border-radius:8px; width:30px; height:30px; font-size:1rem; cursor:pointer; color:var(--ink-2); flex:none;}
+  .modal-meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .modal-section{margin-top:16px;}
+  .modal-section h4{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:700; margin-bottom:6px;}
+  .modal-section p, .modal-section li{font-size:.9rem; color:var(--ink-2);}
+  .modal-section ul{margin:0; padding-left:18px;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:520px){ .two-col{grid-template-columns:1fr;} }
+  .modal-source{margin-top:18px; padding-top:14px; border-top:1px solid var(--border); font-size:.78rem; color:var(--muted);}
+
+  /* ---------- Matrix ---------- */
+  .matrix-wrap{border:1px solid var(--border); background:var(--surface); border-radius:14px; padding:22px 24px; margin-top:16px; box-shadow:var(--shadow);}
+  .matrix-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;}
+  .view-toggle{display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden;}
+  .view-toggle button{padding:6px 12px; font-size:.8rem; border:none; background:var(--surface); color:var(--ink-2); cursor:pointer;}
+  .view-toggle button[aria-pressed="true"]{background:var(--ink); color:var(--surface);}
+  .chart-caption{font-size:.78rem; color:var(--muted); margin-top:10px; max-width:70ch;}
+  .legend-row{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:.8rem; color:var(--ink-2);}
+  .legend-row span{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{width:11px; height:11px; border-radius:50%; display:inline-block;}
+  table.data-table{width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px;}
+  table.data-table th, table.data-table td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top;}
+  table.data-table th{font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700;}
+  .table-scroll{overflow-x:auto;}
+  #tooltip{position:fixed; pointer-events:none; background:var(--ink); color:var(--surface); padding:8px 10px; border-radius:8px; font-size:.78rem; max-width:230px; box-shadow:0 8px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .1s; z-index:60;}
+
+  /* ---------- Process footer ---------- */
+  .process-footer{margin-top:40px; border-top:1px solid var(--border); padding-top:22px;}
+  .process-footer summary{cursor:pointer; font-family:'Source Serif 4'; font-size:1.05rem; font-weight:600; list-style:none; display:flex; align-items:center; gap:8px;}
+  .process-footer summary::-webkit-details-marker{display:none;}
+  .process-footer summary::before{content:'→'; display:inline-block; transition:transform .15s; color:var(--tab-accent, var(--accent-hort));}
+  .process-footer[open] summary::before{transform:rotate(90deg);}
+  .flow-strip{display:flex; overflow-x:auto; gap:0; margin-top:16px; padding-bottom:8px;}
+  .flow-step{flex:1 0 132px; min-width:132px; padding:0 10px; position:relative;}
+  .flow-step:not(:first-child)::before{content:''; position:absolute; top:11px; left:-10px; width:20px; height:1px; background:var(--border-strong);}
+  .flow-step .fs-n{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--muted);}
+  .flow-step .fs-t{font-size:.82rem; font-weight:600; margin-top:4px;}
+  .flow-step .fs-d{font-size:.76rem; color:var(--muted); margin-top:3px; line-height:1.3;}
+  .footer-note{font-size:.8rem; color:var(--muted); margin-top:16px; max-width:74ch;}
+</style>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <p class="brand-eyebrow">AgriFood AI Adoption Project — discovery platform</p>
+      <h1>Groundtruth</h1>
+      <p>What Australian growers actually observe, decide, and do — mapped stage by stage, with every claim traced to a source or flagged as a hypothesis still waiting on one.</p>
+    </div>
+    <div class="confidence-key" aria-label="Confidence key">
+      <span class="ck-item"><span class="ck-dot solid"></span>Primary / quantitative source</span>
+      <span class="ck-item"><span class="ck-dot ring"></span>Program / industry source</span>
+      <span class="ck-item"><span class="ck-dot dotted"></span>Secondary / commentary</span>
+      <span class="ck-item"><span class="ck-dot dashed"></span>Simulated interview (synthetic)</span>
+      <span class="ck-item">? Unvalidated — <span class="mono">[VALIDATE]</span></span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail">
+      <div>
+        <p class="rail-label">Select commodity</p>
+        <div class="persona-tabs" id="personaTabs"></div>
+      </div>
+      <div class="rail-stat" id="railStat"></div>
+      <div class="rail-stat">
+        <div class="rs-label" style="margin-top:0;">Sources logged</div>
+        <div class="rs-figure">16</div>
+        <div class="rs-label">across both personas — see the project's <span class="mono">research/sources.md</span></div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="persona-hero" id="personaHero"></section>
+
+      <section id="journeySection">
+        <div class="section-head">
+          <h2>The journey, stage by stage</h2>
+          <p class="hint">Same nine-stage spine for every commodity, so personas stay comparable. The dot marks a stage with a mapped friction point — click any stage.</p>
+        </div>
+        <div class="spine" id="spine"></div>
+        <div class="stage-detail" id="stageDetail"></div>
+      </section>
+
+      <section id="oppSection">
+        <div class="section-head">
+          <h2>AI opportunity cards</h2>
+          <p class="hint">Every card names the AI move, the workflow it triggers, who stays in the loop, and — mandatory, not optional — what would stop a farmer or an organisation adopting it.</p>
+        </div>
+        <div class="opp-grid" id="oppGrid"></div>
+      </section>
+
+      <section id="matrixSection">
+        <div class="section-head">
+          <h2>Cross-commodity opportunity matrix</h2>
+          <p class="hint">All five opportunity cards on one plot. Scores are first-pass judgement calls awaiting real interviews, not measured data.</p>
+        </div>
+        <div class="matrix-wrap">
+          <div class="matrix-top">
+            <div class="legend-row" id="matrixLegend"></div>
+            <div class="view-toggle" role="group" aria-label="Matrix view">
+              <button id="viewChartBtn" aria-pressed="true">Plot</button>
+              <button id="viewTableBtn" aria-pressed="false">Table</button>
+            </div>
+          </div>
+          <div id="chartHolder"></div>
+          <div id="tableHolder" style="display:none;"></div>
+          <p class="chart-caption">Bubble size = ease of shipping (larger = lower workflow complexity). Position = farmer value against adoption likelihood, both ordinal judgement calls from the opportunity cards' own adoption fields.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <details class="process-footer">
+    <summary>How this data actually gets built (it isn't a database yet)</summary>
+    <p class="footer-note">Every persona on this page is produced by the same eight-step pass: desk research first, a persona, a journey map, opportunity cards, workflow diagrams only where branching logic exists, a scored matrix, an AI-simulated interview against the gaps, then the findings fed back by hand. Right now that whole pipeline runs as markdown files in a git repo, authored in conversation — this page is a rendered view bolted on afterward, not the system of record. The repo's own <span class="mono">PROCESS.md</span> is explicit about the gap: nothing here is computed from a schema, cross-references are kept in sync by memory, and there is still no intake path for a real grower interview to replace a simulated one.</p>
+    <div class="flow-strip" id="flowStrip"></div>
+  </details>
+</div>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+</div>
+<div id="tooltip" role="status"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------------------------------------------------------------
+  // DATA — transcribed from personas/, journeys/, opportunities/, matrix/
+  // ---------------------------------------------------------------
+  const CONF = {
+    sourced: {label:'Grounded in a logged source', cls:'solid'},
+    program: {label:'Program / industry source', cls:'ring'},
+    secondary: {label:'Secondary / commentary', cls:'dotted'},
+    simulated: {label:'Simulated interview (synthetic, not evidence)', cls:'dashed'},
+    validate: {label:'Unvalidated — [VALIDATE]', cls:''}
+  };
+
+  const PERSONAS = {
+    horticulture: {
+      id:'horticulture', name:'Horticulture Grower', accent:'hort',
+      sub:'Perennial tree & vine crops',
+      snapshot:{
+        commodity:'Almonds, citrus, wine grapes — often multiple crops on one property',
+        region:'Irrigated inland horticulture belt (Sunraysia, Riverina, Riverland)',
+        structure:'Owner-operator + 1–3 permanent staff, seasonal harvest crew, contracted agronomist (visits ~2–6 weekly in-season)',
+        economics:'~$105.8k → $122k avg farm cash income, irrigated MDB horticulture (ABARES, 2014–15→2015–16 — dated). Only ~16% of hort farms cleared a 10%+ return in 2015–16, mostly large multi-crop operations.'
+      },
+      statFigure:'$1.3B', statLabel:'Almond sector value, 2024–25 (ABS), +19.6% on prior year — the pilot sub-sector for this persona',
+      trust:['References the specific block’s own history, not a generic regional model','Shows the "why" the way a good agronomist would on a walk, not a black-box score','Fits inside the existing walk/phone routine, not a new app session','Endorsed or used by the grower’s own agronomist'],
+      reject:['Generic advice that ignores known block-level variation','"Another platform to log into and enter data"','Recommendations that ignore cash-flow/labour constraints','Losing authorship over the decision'],
+      journey:[
+        {id:'plan', label:'Plan', desc:'Nutrition, spray and irrigation program set with the agronomist ~July for the season ahead — a proper written document, not just a conversation.',
+          friction:[{problem:'Recommended actions can have no date/window trigger, so follow-through slides without anyone disagreeing with the plan.', current:'A soil-amendment step in a simulated interview "kept sliding" all season — the plan existed, the trigger to act on one line of it didn’t.', confidence:'simulated', opportunityId:'plan-op'}]},
+        {id:'monitor', label:'Monitor', desc:'Daily walk — canopy, fruit set, irrigation lines, pest/disease signs — pattern-matched against "normal for this block, this time of year."',
+          friction:[{problem:'No structured record of what’s observed; season-over-season comparison depends on memory alone.', current:'The simulated grower already takes phone photos "for my own memory" — they just accumulate, unused, in her camera roll.', confidence:'simulated', opportunityId:'obs-capture'}]},
+        {id:'decide', label:'Decide', desc:'Informal triage on anything unusual: call the agronomist now, or keep monitoring?',
+          friction:[{problem:'Too many disconnected information sources (weather app, regional pest-alert app, own observation) with no synthesis between them.', current:'The phone call to the agronomist functions as the grower’s actual synthesis step today (QUT Darling Downs finding).', confidence:'sourced', opportunityId:'pest-detect'}]},
+        {id:'procure', label:'Procure', desc:'Chemicals and nutrition products sourced per the agronomist’s program; water — bought on the temporary market vs. relying on allocation — is the one input decision with real financial weight.', friction:[]},
+        {id:'labour', label:'Labour', desc:'Permanent staff plus a harvest crew booked months ahead; equipment failure (irrigation, spray gear) is handled ad hoc, no on-call arrangement.', friction:[]},
+        {id:'harvest', label:'Harvest', desc:'Timing driven by hull-split percentage and the processor’s intake queue — not just the grower’s own readiness.', friction:[]},
+        {id:'sell', label:'Sell', desc:'Output goes to a processor or packer against quality specs.',
+          friction:[{problem:'On a multi-crop property, market visibility may differ by crop rather than being one uniform answer.', current:'Almonds sold via a pooling arrangement (price known only after the fact); citrus sold via a packer on immediate spec-and-price terms.', confidence:'simulated', opportunityId:null}]},
+        {id:'finance', label:'Finance', desc:'Chemical-use records kept on an agronomist-supplied spreadsheet template, mainly for QA schemes like Freshcare/SQF.',
+          friction:[{problem:'Compliance records are disconnected from the daily observation that could have generated them.', current:'Kept promptly (within a day or two) and occasionally reused informally to check "what did we spray and when" — a side effect, not by design.', confidence:'simulated', opportunityId:null}]},
+        {id:'review', label:'Review', desc:'Yield per block against last year and against what the agronomist expected — a conversation at the end-of-season visit, not a prepared report.',
+          friction:[{problem:'No systematic link between what was recommended, what was actually done, and the season’s outcome.', current:'Informal, subjective review; learning is tacit and slow.', confidence:'validate', opportunityId:null}]}
+      ],
+      opportunities:['obs-capture','plan-op','pest-detect']
+    },
+    livestock:{
+      id:'livestock', name:'Livestock Grazier', accent:'live',
+      sub:'Beef & sheep, extensive grazing',
+      snapshot:{
+        commodity:'Extensive beef cattle and/or sheep grazing (specialist beef is the largest single group)',
+        region:'Not tied to one irrigation district — spans most of Australia’s grazing land; northern breeding country and southern mixed zones behave differently',
+        structure:'Owner-operator + family labour, contract musterers/shearers at peak events. Advisor relationships likely distributed: vet, stock agent, group extension — not one recurring agronomist-equivalent',
+        economics:'Avg beef farm cash income $238k (2022–23, a strong year) — but highly volatile: fell substantially in the 2023–24 drought before recovering. 3-yr average to 2024–25 sat just under the $155.3k long-run average (ABARES).'
+      },
+      statFigure:'9.4%', statLabel:'Share of eligible wool levy payers who completed AWI’s flagship Lifetime Ewe Management training — a real ceiling on group-extension reach',
+      trust:['Property-specific rather than generic regional advice (by analogy with horticulture — not yet confirmed for this persona)','Low time cost, fitting the existing ute/phone routine','An identifiable, trusted human validator — though who that is remains unresolved'],
+      reject:['Generic advice ignoring property-specific conditions','"Another platform to log into," especially after an abandoned grazing app','Anything that reduces perceived control over animal-welfare decisions'],
+      journey:[
+        {id:'plan', label:'Plan', desc:'Joining and weaning dates fixed roughly a year out; almost everything else (stocking rate, background vs. sell) is decided inside the season, not before it.', friction:[]},
+        {id:'monitor', label:'Monitor', desc:'Regular stock and pasture checks by vehicle, horseback or drone — harder to hold a reliable "normal" baseline for a mobile mob across large, variable land than for a fixed block.',
+          friction:[{problem:'No structured record of the grazier’s own feed/pasture position to reason from.', current:'Feed position is estimated from the same paddock checks and held in the grazier’s head — "I get that wrong more than I’d like to admit."', confidence:'simulated', opportunityId:'feed-track'}]},
+        {id:'decide', label:'Decide', desc:'Pattern-based judgement on stock condition against experience — the same structure as horticulture’s block pattern-matching, applied to a mobile herd instead of a fixed block.', friction:[]},
+        {id:'procure', label:'Procure', desc:'Supplements sourced from the usual supplier; feed procurement in a dry run is the one input decision with real stakes and real time pressure.',
+          friction:[{problem:'High uncertainty on feed availability and price exactly when it matters most.', current:'The simulated grazier described "ringing five different contacts" for hay, with the price moving against him twice while he searched.', confidence:'simulated', opportunityId:'feed-track'}]},
+        {id:'labour', label:'Labour', desc:'Family labour plus contract musterers/shearers at peak events; equipment failure (bore pumps, yards) is handled by whoever can come fastest.', friction:[]},
+        {id:'harvest', label:'Muster', desc:'Weaning is roughly calendar-fixed; mustering for sale prep is more fluid and often constrained by contractor availability, not just the herd’s readiness.', friction:[]},
+        {id:'sell', label:'Sell', desc:'Sale timing/channel decision (saleyard, over-the-hook, direct, store vs. finished) under real income-volatility stakes.',
+          friction:[{problem:'Sale timing and feed availability may not be separable decisions in practice.', current:'MLA’s National Livestock Reporting Service already centrally publishes current saleyard/price data — the real gap is combining that with the grazier’s own feed position, not sourcing market data from scratch.', confidence:'sourced', opportunityId:'sale-timing'}]},
+        {id:'finance', label:'Finance', desc:'NLIS movement records are mandatory regardless of the grazier’s own preference.',
+          friction:[{problem:'NLIS data may be pure compliance box-ticking, disconnected from day-to-day decisions.', current:'A FutureBeef resource specifically titled "Using NLIS as a management tool" suggests the industry itself treats this gap as common enough to need correcting.', confidence:'validate', opportunityId:null}]},
+        {id:'review', label:'Review', desc:'Weaning percentage and $/head vs. last year, largely from memory.',
+          friction:[{problem:'Unclear whether this review is more structured than horticulture’s informal one, given MLA/AWI’s group-extension programs.', current:'Not yet tested against a real interview.', confidence:'validate', opportunityId:null}]}
+      ],
+      opportunities:['feed-track','sale-timing']
+    }
+  };
+
+  const OPPS = {
+    'obs-capture':{
+      id:'obs-capture', personaId:'horticulture', name:'Structured Observation Capture', stage:'Monitor',
+      tags:['Summarise','Interpret'],
+      problem:'No structured record of what was observed on the walk; season-over-season comparison depends on memory.',
+      current:'Grower already takes phone photos on the walk "more for my own memory than anything," but they simply accumulate unused in her camera roll.',
+      ai:'Tag existing phone photos by block/date/what’s visible — automatically from timestamp/location, or a one-word voice tag at the moment of taking it — turning an undifferentiated camera roll into a searchable, block-specific timeline. No new capture behaviour required.',
+      workflow:'Minimal — a background tagging service, not a case. Feeds the plan-operationalisation check-ins and gives the pest/disease card the block history it needs to be trusted.',
+      human:'None required for the baseline; the agronomist benefits as a secondary user during visits or calls.',
+      adoptionFarmer:'Requires trust that photos are stored appropriately, and near-zero added effort — or it risks the same fate as an abandoned soil-moisture-probe app the simulated grower described.',
+      adoptionOrg:'Value depends on feeding the two higher-value cards below rather than standing alone — treat as shared infrastructure, not an independent product decision.',
+      value:['Lowest-friction opportunity identified for this persona — reuses an existing habit','Directly enables the block-specific history both other cards depend on for trust','Creates the missing season-over-season comparison data'],
+      maturity:'Idea', confidence:'simulated',
+      sourceNote:'Entirely from a simulated interview — below secondary/commentary confidence. The underlying habit (growers already taking phone photos on the walk) should be one of the first things a real interview confirms or corrects.'
+    },
+    'plan-op':{
+      id:'plan-op', personaId:'horticulture', name:'Season Plan Operationalisation', stage:'Plan → Monitor',
+      tags:['Summarise','Coordinate','Converse'],
+      problem:'The agronomist’s plan never resurfaces during the daily walk/decision routine — the single biggest adoption gap named in this project’s founding thesis.',
+      current:'Plan is set at a scheduled agronomist visit; grower carries it forward from memory with no structured prompting during the season.',
+      ai:'Convert the plan into a small number of block-and-date-tagged check-ins that surface during the grower’s existing walk/phone routine — sharpened by simulation toward date/window triggers on individual actions, not a wholesale rebuild of how the plan is communicated.',
+      workflow:'Low complexity for the baseline case — a scheduled prompt, not a diagnosis. Complexity rises only if a check-in reveals the plan isn’t being followed and needs to route back to the agronomist for a revision.',
+      human:'Agronomist authors the plan and any revision; grower confirms/adjusts each check-in — no AI-only decision path.',
+      adoptionFarmer:'"Another platform to log into" is a named rejection trigger; also needs the agronomist’s plan to arrive in a structured-enough form to convert into check-ins.',
+      adoptionOrg:'Depends on structured plan input from the agronomist side, not just the grower — could be seeded manually at first (someone transcribes the plan into check-ins) to prove grower-side value before asking agronomists to change how they work.',
+      value:['Directly targets the adoption gap named as the core thesis of this project','Creates the missing outcome data needed to close the loop into Review','Low direct cost once the plan is structured — a scheduling problem, not a modelling one'],
+      maturity:'Idea', confidence:'validate',
+      sourceNote:'Problem framing is central to the project’s founding thesis; the date/window-trigger sharpening comes from a simulated interview only — a hypothesis, not evidence.'
+    },
+    'pest-detect':{
+      id:'pest-detect', personaId:'horticulture', name:'Predictive Pest/Disease Detection & Triage', stage:'Monitor → Decide',
+      tags:['Interpret','Detect anomalies','Recommend'],
+      problem:'Deciding whether a deviation is urgent enough to call the agronomist, with no baseline to check against, and too many disconnected information sources to synthesise alone.',
+      current:'Grower notices unusual symptoms → describes them by phone or photo to the agronomist → waits → decides on treatment once diagnosed.',
+      ai:'Grower uploads a photo (an existing habit) → AI identifies the likely issue, combined with weather, crop stage, and that specific block’s own history → recommends next steps with a visible confidence score.',
+      workflow:'High-confidence cases return a recommendation directly; low-confidence or high-impact cases open an investigation case routed to the agronomist — see the dedicated workflow diagram.',
+      human:'Agronomist validates and resolves low-confidence or high-impact cases; retains final treatment authority.',
+      adoptionFarmer:'Trust in an automated diagnosis is the core risk — a wrong call could mean real crop loss. The simulated grower named block-specific history (a known salinity issue) almost unprompted as the exact thing that would make her trust or distrust a recommendation.',
+      adoptionOrg:'Who’s accountable if a high-confidence call is wrong? Confidence threshold tuned conservatively at launch, with a full audit trail of every recommendation and outcome.',
+      value:['Reduced crop loss from earlier detection than the current wait-for-response cycle','Reduced unnecessary agronomist call-outs on high-confidence issues','Faster intervention on real issues; possible reduced chemical usage'],
+      maturity:'Idea', confidence:'sourced',
+      sourceNote:'Trust dynamics grounded in the QUT Darling Downs digital AgTech case study (agronomists rated the most trusted information source); cold-start data needs and exact value figures remain unvalidated.'
+    },
+    'feed-track':{
+      id:'feed-track', personaId:'livestock', name:'Feed & Pasture Position Tracking', stage:'Monitor → Procure',
+      tags:['Interpret','Summarise','Predict'],
+      problem:'No structured record of the grazier’s own feed position, and high uncertainty on feed availability/price exactly when it matters most in a dry season.',
+      current:'Feed position is estimated from the same regular paddock checks and held in the grazier’s head; in a dry run, procurement meant "ringing five different contacts" while price moved against him twice.',
+      ai:'Turn the grazier’s existing pasture observations into a running, structured feed-position estimate ("X weeks of grazing at current numbers") — building on an existing habit rather than a new one, feeding directly into the sale-timing card.',
+      workflow:'Minimal — a background estimate updating from existing check-in data, not an event-triggered case.',
+      human:'None required for the baseline estimate; the stock agent benefits as a secondary consumer when advising on sale timing.',
+      adoptionFarmer:'The grazier already knows he sometimes gets this estimate wrong from observation alone — an AI estimate on the same inputs needs to add something beyond what his own eye does, or show its uncertainty honestly rather than overclaiming precision.',
+      adoptionOrg:'Functionally overlaps existing commercial grazing tools (Grazing Charts, AgriWebb, Atlas Grazing, Farming Forecaster) and CSIRO’s own Future Drought Fund-funded destocking-tool research — a build-vs-partner decision should happen before this matures past Idea.',
+      value:['Closes the exact gap the simulated stock agent named for the sale-timing card','Plausible reduction in the "ringing five contacts while price moves" pattern','Lower adoption risk than sale-timing alone — structures an estimate the grazier already makes'],
+      maturity:'Idea', confidence:'simulated',
+      sourceNote:'Entirely from a simulated interview, plus commercial tools and CSIRO research logged as prior art/possible partners. Whether graziers actually want a structured estimate — versus trusting their own eye — is an open real-interview question.'
+    },
+    'sale-timing':{
+      id:'sale-timing', personaId:'livestock', name:'Sale Timing & Channel Advisor', stage:'Sell',
+      tags:['Predict','Summarise','Recommend'],
+      problem:'Sale timing/channel decision carries real income-volatility stakes without necessarily combining market data, feed position and stock condition into one view.',
+      current:'Grower checks saleyard reports and calls the stock agent, working the market question and the feed question separately — and reported losing track of one while working the other.',
+      ai:'Combine stock condition/weight trajectory, local feed/season outlook, and market price signals into a synthesised "sell now vs. hold" view, with reasoning shown — not a single black-box number.',
+      workflow:'Low complexity — a standing decision-support view the grower checks periodically, not an event-triggered case. No escalation logic needed since the grower keeps the decision.',
+      human:'Stock agent remains the transaction/negotiation party and a likely cross-check — this supports the grower’s decision, not a replacement for the agent relationship.',
+      adoptionFarmer:'The highest-stakes, most consequence-loaded decision identified across either persona — a wrong recommendation matters far more here than a wrong pest-ID call. Show reasoning and underlying data, not a bare recommendation, so the grower keeps final judgement.',
+      adoptionOrg:'MLA’s National Livestock Reporting Service already solves the market-data half at industry scale — the real differentiation is synthesis with feed/condition data, not sourcing market data from scratch. CSIRO’s own destocking-tool program is close enough to need a build-vs-partner call.',
+      value:['Avoiding forced/distressed sales at depressed prices is plausibly the single largest economic lever in this persona’s year','Time saved reconciling multiple currently-disconnected sources'],
+      maturity:'Idea', confidence:'sourced',
+      sourceNote:'Stakes grounded in ABARES income-volatility data and MLA’s NLRS; CSIRO drought-resilience research corroborates the "decided from pragmatism, not structured data" pattern. The trust-anchor question (is the stock agent really the equivalent of horticulture’s agronomist?) remains simulated-only.'
+    }
+  };
+
+  // ordinal scores: value/adoption 1(low)-5(high); complexity 1(very low)-3(medium) -> bigger bubble = lower complexity
+  const SCORES = {
+    'obs-capture': {value:2, valueLabel:'Medium (high as enabling infra)', adoption:5, adoptionLabel:'High', complexity:1, complexityLabel:'Very low', priority:3},
+    'plan-op':     {value:5, valueLabel:'Very high', adoption:3, adoptionLabel:'Medium', complexity:2, complexityLabel:'Low', priority:3},
+    'pest-detect': {value:4, valueLabel:'High', adoption:3, adoptionLabel:'Medium', complexity:3, complexityLabel:'Medium', priority:3},
+    'feed-track':  {value:2, valueLabel:'Medium (high as enabling infra)', adoption:3, adoptionLabel:'Medium', complexity:1, complexityLabel:'Very low', priority:2},
+    'sale-timing': {value:5, valueLabel:'Very high', adoption:2, adoptionLabel:'Low–medium', complexity:2, complexityLabel:'Low', priority:3}
+  };
+
+  const FLOW = [
+    {n:'0', t:'Desk research', d:'Log every source with a confidence tier'},
+    {n:'1', t:'Persona', d:'Populate the template; cite or [VALIDATE]'},
+    {n:'2', t:'Journey', d:'The 9-stage spine + friction table'},
+    {n:'3', t:'Opportunity cards', d:'One per friction point worth pursuing'},
+    {n:'4', t:'Workflow diagrams', d:'Only where branching/escalation exists'},
+    {n:'5', t:'Matrix', d:'Score every card — every persona gets one'},
+    {n:'6', t:'Simulated interview', d:'Role-play a labelled synthetic grower'},
+    {n:'7', t:'Feed back', d:'Annotate, never overwrite, earlier files'}
+  ];
+
+  // ---------------------------------------------------------------
+  // STATE + RENDER
+  // ---------------------------------------------------------------
+  let currentPersona = 'horticulture';
+  let currentStageId = 'monitor';
+  let matrixView = 'chart';
+
+  const $ = (sel, el) => (el||document).querySelector(sel);
+  const $all = (sel, el) => Array.from((el||document).querySelectorAll(sel));
+
+  function accentVars(accent){
+    return accent === 'hort'
+      ? {'--tab-accent':'var(--accent-hort)', '--tab-accent-ink':'var(--accent-hort-ink)', '--tab-tint':'var(--accent-hort-tint)'}
+      : {'--tab-accent':'var(--accent-live)', '--tab-accent-ink':'var(--accent-live-ink)', '--tab-tint':'var(--accent-live-tint)'};
+  }
+  function applyAccent(el, accent){
+    const vars = accentVars(accent);
+    Object.keys(vars).forEach(k => el.style.setProperty(k, vars[k]));
+  }
+
+  function confBadge(key){
+    const c = CONF[key] || CONF.validate;
+    return '<span class="tag-confidence"><span class="ck-dot ' + c.cls + '" style="width:7px;height:7px;"></span>' + c.label + '</span>';
+  }
+
+  function renderPersonaTabs(){
+    const wrap = $('#personaTabs');
+    wrap.innerHTML = '';
+    Object.values(PERSONAS).forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'persona-tab';
+      btn.setAttribute('data-active', p.id === currentPersona ? 'true':'false');
+      applyAccent(btn, p.accent);
+      btn.innerHTML = '<span class="pt-name">' + p.name + '</span><span class="pt-sub">' + p.sub + '</span>';
+      btn.addEventListener('click', () => { currentPersona = p.id; currentStageId = PERSONAS[p.id].journey[1].id; renderAll(); });
+      wrap.appendChild(btn);
+    });
+    const p = PERSONAS[currentPersona];
+    const rs = $('#railStat');
+    applyAccent(rs, p.accent);
+    rs.innerHTML = '<div class="rs-label" style="margin-top:0;">' + p.statLabel + '</div><div class="rs-figure" style="color:var(--tab-accent-ink)">' + p.statFigure + '</div>';
+  }
+
+  function renderHero(){
+    const p = PERSONAS[currentPersona];
+    const hero = $('#personaHero');
+    applyAccent(hero, p.accent);
+    const s = p.snapshot;
+    hero.innerHTML =
+      '<div class="ph-top"><h2>' + p.name + '</h2><span class="persona-pill">' + p.sub + '</span></div>' +
+      '<dl class="ph-grid">' +
+        '<div class="ph-field"><dt>Commodity</dt><dd>' + s.commodity + '</dd></div>' +
+        '<div class="ph-field"><dt>Region</dt><dd>' + s.region + '</dd></div>' +
+        '<div class="ph-field"><dt>Structure</dt><dd>' + s.structure + '</dd></div>' +
+        '<div class="ph-field"><dt>Farm economics</dt><dd>' + s.economics + '</dd></div>' +
+      '</dl>' +
+      '<div class="trigger-grid">' +
+        '<div class="trigger-box"><h4>Trust triggers</h4><ul>' + p.trust.map(t=>'<li>'+t+'</li>').join('') + '</ul></div>' +
+        '<div class="trigger-box"><h4>Rejection triggers</h4><ul>' + p.reject.map(t=>'<li>'+t+'</li>').join('') + '</ul></div>' +
+      '</div>';
+  }
+
+  function renderSpine(){
+    const p = PERSONAS[currentPersona];
+    const spine = $('#spine');
+    applyAccent(spine, p.accent);
+    spine.innerHTML = '';
+    p.journey.forEach(stage => {
+      const node = document.createElement('div');
+      node.className = 'spine-node' + (stage.friction.length ? ' has-friction' : '');
+      node.innerHTML = '<div class="connector"></div>' +
+        '<button class="spine-btn" aria-pressed="' + (stage.id===currentStageId) + '">' +
+          '<span class="spine-num"></span><span class="spine-label">' + stage.label + '</span>' +
+        '</button>';
+      node.querySelector('.spine-btn').addEventListener('click', () => { currentStageId = stage.id; renderStageDetail(); $all('.spine-btn').forEach(b=>b.setAttribute('aria-pressed','false')); node.querySelector('.spine-btn').setAttribute('aria-pressed','true'); });
+      spine.appendChild(node);
+    });
+    renderStageDetail();
+  }
+
+  function renderStageDetail(){
+    const p = PERSONAS[currentPersona];
+    const stage = p.journey.find(s => s.id === currentStageId) || p.journey[0];
+    const wrap = $('#stageDetail');
+    applyAccent(wrap, p.accent);
+    let html = '<h3>' + stage.label + '</h3><p class="desc">' + stage.desc + '</p>';
+    if (stage.friction.length === 0){
+      html += '<p class="fi-text" style="color:var(--muted); font-style:italic;">No mapped friction point at this stage yet — not yet worth an opportunity card, or simply not researched.</p>';
+    } else {
+      stage.friction.forEach(f => {
+        html += '<div class="friction-item"><div class="fi-row">' +
+          '<div><div class="fi-label">Farmer problem</div><div class="fi-text">' + f.problem + '</div></div>' +
+          '<div><div class="fi-label">Current behaviour ' + confBadge(f.confidence) + '</div><div class="fi-text">' + f.current + '</div></div>' +
+        '</div>';
+        if (f.opportunityId){
+          html += '<button class="opp-link" data-opp="' + f.opportunityId + '">See the opportunity card: ' + OPPS[f.opportunityId].name + ' →</button>';
+        }
+        html += '</div>';
+      });
+    }
+    wrap.innerHTML = html;
+    $all('.opp-link', wrap).forEach(b => b.addEventListener('click', () => openModal(b.getAttribute('data-opp'))));
+  }
+
+  function renderOppGrid(){
+    const p = PERSONAS[currentPersona];
+    const grid = $('#oppGrid');
+    applyAccent(grid, p.accent);
+    grid.innerHTML = '';
+    p.opportunities.forEach(id => {
+      const o = OPPS[id];
+      const sc = SCORES[id];
+      const card = document.createElement('div');
+      card.className = 'opp-card';
+      card.innerHTML =
+        '<div class="oc-stage">' + o.stage + '</div>' +
+        '<h3>' + o.name + '</h3>' +
+        '<div class="oc-tags">' + o.tags.map(t=>'<span class="oc-tag">'+t+'</span>').join('') + '</div>' +
+        '<p class="oc-problem">' + o.problem + '</p>' +
+        '<div class="oc-foot"><span class="maturity-chip">' + o.maturity + '</span><span class="stars" title="Priority">' + '★'.repeat(sc.priority) + '<span style="color:var(--border-strong)">' + '★'.repeat(3-sc.priority) + '</span></span></div>';
+      card.addEventListener('click', () => openModal(id));
+      grid.appendChild(card);
+    });
+  }
+
+  function openModal(id){
+    const o = OPPS[id];
+    const p = PERSONAS[o.personaId];
+    const back = $('#modalBack');
+    const modal = $('#modal');
+    applyAccent(modal, p.accent);
+    modal.innerHTML =
+      '<div class="modal-head"><div><h3>' + o.name + '</h3><div class="oc-stage" style="margin-top:4px;">' + p.name + ' · ' + o.stage + '</div></div><button class="modal-close" aria-label="Close">✕</button></div>' +
+      '<div class="modal-meta"><span class="oc-tag">Maturity: ' + o.maturity + '</span>' + o.tags.map(t=>'<span class="oc-tag">'+t+'</span>').join('') + '</div>' +
+      '<div class="modal-section"><h4>Problem</h4><p>' + o.problem + '</p></div>' +
+      '<div class="modal-section"><h4>Current behaviour ' + confBadge(o.confidence) + '</h4><p>' + o.current + '</p></div>' +
+      '<div class="modal-section"><h4>AI intervention</h4><p>' + o.ai + '</p></div>' +
+      '<div class="modal-section"><h4>Workflow intervention</h4><p>' + o.workflow + '</p></div>' +
+      '<div class="modal-section"><h4>Human role</h4><p>' + o.human + '</p></div>' +
+      '<div class="modal-section two-col">' +
+        '<div><h4>Adoption barrier — farmer</h4><p>' + o.adoptionFarmer + '</p></div>' +
+        '<div><h4>Adoption barrier — organisational</h4><p>' + o.adoptionOrg + '</p></div>' +
+      '</div>' +
+      '<div class="modal-section"><h4>Potential value</h4><ul>' + o.value.map(v=>'<li>'+v+'</li>').join('') + '</ul></div>' +
+      '<div class="modal-source">' + o.sourceNote + '</div>';
+    modal.querySelector('.modal-close').addEventListener('click', closeModal);
+    back.setAttribute('data-open','true');
+  }
+  function closeModal(){ $('#modalBack').setAttribute('data-open','false'); }
+  $('#modalBack').addEventListener('click', (e) => { if (e.target.id === 'modalBack') closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // ---------------- Matrix chart ----------------
+  function renderMatrixLegend(){
+    const wrap = $('#matrixLegend');
+    wrap.innerHTML =
+      '<span><span class="legend-swatch" style="background:var(--accent-hort)"></span>Horticulture</span>' +
+      '<span><span class="legend-swatch" style="background:var(--accent-live)"></span>Livestock</span>';
+  }
+
+  function renderChart(){
+    const holder = $('#chartHolder');
+    const W = 640, H = 380, M = {top:16,right:24,bottom:44,left:120};
+    const plotW = W - M.left - M.right, plotH = H - M.top - M.bottom;
+    const xScale = v => M.left + ((v-1)/4) * plotW;
+    const yScale = v => M.top + (1-((v-1)/4)) * plotH;
+    const rScale = c => c===1?24:c===2?18:13;
+
+    let marks = '';
+    let labels = '';
+    Object.values(OPPS).forEach(o => {
+      const sc = SCORES[o.id];
+      const persona = PERSONAS[o.personaId];
+      const color = persona.accent === 'hort' ? 'var(--accent-hort)' : 'var(--accent-live)';
+      const cx = xScale(sc.adoption), cy = yScale(sc.value), r = rScale(sc.complexity);
+      marks += '<circle class="mark" data-opp="' + o.id + '" cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + color + '" fill-opacity="0.82" stroke="var(--surface)" stroke-width="2" tabindex="0" role="button" aria-label="' + o.name + '"></circle>';
+      labels += '<text x="' + cx + '" y="' + (cy - r - 7) + '" text-anchor="middle" font-size="10.5" font-family="IBM Plex Mono, monospace" fill="var(--ink-2)">' + o.name.split(' ').slice(0,2).join(' ') + '</text>';
+    });
+
+    const xTicks = [1,2,3,4,5].map(v => '<text x="'+xScale(v)+'" y="'+(H-M.bottom+20)+'" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="Source Sans 3">'+['Low','','Medium','','High'][v-1]+'</text>').join('');
+    const yTicks = [1,2,3,4,5].map(v => '<text x="'+(M.left-12)+'" y="'+(yScale(v)+4)+'" text-anchor="end" font-size="10.5" fill="var(--muted)" font-family="Source Sans 3">'+['Low','','Medium','','V.High'][v-1]+'</text>').join('');
+    const gridV = [1,2,3,4,5].map(v => '<line x1="'+xScale(v)+'" y1="'+M.top+'" x2="'+xScale(v)+'" y2="'+(H-M.bottom)+'" stroke="var(--border)" stroke-width="1"/>').join('');
+    const gridH = [1,2,3,4,5].map(v => '<line x1="'+M.left+'" y1="'+yScale(v)+'" x2="'+(W-M.right)+'" y2="'+yScale(v)+'" stroke="var(--border)" stroke-width="1"/>').join('');
+
+    holder.innerHTML =
+      '<div style="overflow-x:auto;"><svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" style="max-width:680px; display:block; margin-top:6px;" role="img" aria-label="Opportunity matrix: farmer value against adoption likelihood">' +
+        gridV + gridH +
+        '<line x1="'+M.left+'" y1="'+M.top+'" x2="'+M.left+'" y2="'+(H-M.bottom)+'" stroke="var(--border-strong)" stroke-width="1.5"/>' +
+        '<line x1="'+M.left+'" y1="'+(H-M.bottom)+'" x2="'+(W-M.right)+'" y2="'+(H-M.bottom)+'" stroke="var(--border-strong)" stroke-width="1.5"/>' +
+        xTicks + yTicks +
+        '<text x="'+(M.left+plotW/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="var(--ink-2)" font-family="Source Sans 3" font-weight="600">Adoption likelihood →</text>' +
+        '<text x="14" y="'+(M.top+plotH/2)+'" text-anchor="middle" font-size="11" fill="var(--ink-2)" font-family="Source Sans 3" font-weight="600" transform="rotate(-90 14 '+(M.top+plotH/2)+')">Farmer value →</text>' +
+        marks + labels +
+      '</svg></div>';
+
+    const tooltip = $('#tooltip');
+    $all('.mark', holder).forEach(m => {
+      const id = m.getAttribute('data-opp');
+      const o = OPPS[id], sc = SCORES[id], persona = PERSONAS[o.personaId];
+      const show = (evt) => {
+        tooltip.innerHTML = '<strong>' + o.name + '</strong><br>' + persona.name + '<br>Value: ' + sc.valueLabel + ' · Adoption: ' + sc.adoptionLabel + '<br>Complexity: ' + sc.complexityLabel;
+        tooltip.style.left = (evt.clientX + 14) + 'px';
+        tooltip.style.top = (evt.clientY + 14) + 'px';
+        tooltip.style.opacity = '1';
+      };
+      m.addEventListener('mousemove', show);
+      m.addEventListener('mouseenter', show);
+      m.addEventListener('mouseleave', () => tooltip.style.opacity = '0');
+      m.addEventListener('focus', (e) => show({clientX:200, clientY:200}));
+      m.addEventListener('blur', () => tooltip.style.opacity = '0');
+      m.addEventListener('click', () => openModal(id));
+      m.style.cursor = 'pointer';
+    });
+  }
+
+  function renderMatrixTable(){
+    const holder = $('#tableHolder');
+    let rows = '';
+    Object.values(OPPS).forEach(o => {
+      const sc = SCORES[o.id];
+      const p = PERSONAS[o.personaId];
+      rows += '<tr><td>' + p.name + '</td><td>' + o.name + '</td><td>' + o.stage + '</td><td>' + sc.valueLabel + '</td><td>' + sc.adoptionLabel + '</td><td>' + sc.complexityLabel + '</td><td>' + '★'.repeat(sc.priority) + '</td></tr>';
+    });
+    holder.innerHTML = '<div class="table-scroll"><table class="data-table"><thead><tr><th>Persona</th><th>Opportunity</th><th>Journey stage</th><th>Farmer value</th><th>Adoption likelihood</th><th>Workflow complexity</th><th>Priority</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function renderFlow(){
+    $('#flowStrip').innerHTML = FLOW.map(f => '<div class="flow-step"><div class="fs-n">STEP ' + f.n + '</div><div class="fs-t">' + f.t + '</div><div class="fs-d">' + f.d + '</div></div>').join('');
+  }
+
+  $('#viewChartBtn').addEventListener('click', () => { matrixView='chart'; $('#viewChartBtn').setAttribute('aria-pressed','true'); $('#viewTableBtn').setAttribute('aria-pressed','false'); $('#chartHolder').style.display='block'; $('#tableHolder').style.display='none'; });
+  $('#viewTableBtn').addEventListener('click', () => { matrixView='table'; $('#viewTableBtn').setAttribute('aria-pressed','true'); $('#viewChartBtn').setAttribute('aria-pressed','false'); $('#tableHolder').style.display='block'; $('#chartHolder').style.display='none'; });
+
+  function renderAll(){
+    renderPersonaTabs();
+    renderHero();
+    renderSpine();
+    renderOppGrid();
+  }
+
+  renderAll();
+  renderMatrixLegend();
+  renderChart();
+  renderMatrixTable();
+  renderFlow();
+})();
+</script>
