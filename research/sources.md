@@ -247,6 +247,101 @@ Confidence key:
   commercial software already in the mix. `[VALIDATE]` how much of this
   is genuinely in use vs. aspirational vendor pitch.
 
+- **MLA — National Livestock Reporting Service (NLRS)**
+  [mla.com.au/about-nlrs](https://www.mla.com.au/prices-markets/about-the-national-livestock-reporting-service/),
+  background via [Beef Central](https://www.beefcentral.com/markets/new-online-market-indicators-add-to-livestock-pricing-intel/)
+  — *Primary/industry infrastructure.* MLA runs the leading livestock
+  market-data service in Australia: 8 analysts and 27 livestock market
+  officers reporting on up to 70 saleyard markets a week across ~50
+  regional locations, plus slaughter/wholesale/skin data, with an
+  enhanced interactive online tool for filtering/charting/downloading
+  market indicators. This is directly relevant to
+  `opportunities/livestock-sale-timing-advisor.md`: it confirms
+  structured, current market data already exists centrally and is
+  reasonably accessible — meaning that opportunity's realistic value-add
+  is synthesis (combining this feed against the grazier's own feed
+  position and stock condition), not sourcing raw market data from
+  scratch. Revises the earlier `[VALIDATE]` assumption that the grazier
+  necessarily "checks several disconnected sources" for market
+  information specifically — NLRS may already be the single
+  authoritative source for that half of the decision, even if feed
+  position and stock condition still aren't integrated with it.
+
+- **CSIRO — drought resilience and destocking decision research
+  (Future Drought Fund-funded)**
+  [csiro.au/destocking](https://www.csiro.au/en/about/challenges-missions/drought-resilience/mission-progress/destocking),
+  [Rangeland Journal — "Achieving drought resilience in the grazing lands
+  of northern Australia"](https://www.publish.csiro.au/rj/Fulltext/rj20058)
+  — *Primary/academic + program.* Directly relevant to
+  `opportunities/livestock-sale-timing-advisor.md` and
+  `opportunities/livestock-feed-position-tracking.md`: CSIRO (with UNE and
+  CQUniversity, Future Drought Fund-funded) is actively building digital
+  tools integrating pasture growth models with herd/flock economic models
+  to support destocking/restocking decisions — i.e. a near-identical
+  opportunity to the ones already drafted for this project, from a
+  credible research body, not just a hypothesis. **Key behavioural
+  finding**: producer decision-making on destocking is "strongly framed
+  in terms of local knowledge and pragmatism, not necessarily detailed
+  climate information," and there is a documented pattern of producers
+  relying on drought subsidies rather than proactive planning/timely
+  destocking in low-rainfall years — a sourced, specific version of the
+  "grazier holds feed/sale decisions in his head rather than referencing
+  structured data" pattern that was previously only a simulated-interview
+  signal. This existing research program is a strong candidate to connect
+  with directly (per README task #7) rather than duplicating it.
+
+- **GrazingFutures — Queensland DAF extension program, western Queensland
+  rangelands (2016-2022, part of the Drought and Climate Adaptation
+  Program)**
+  [publish.csiro.au/RJ/fulltext/RJ20078](https://publish.csiro.au/RJ/fulltext/RJ20078)
+  — *Primary/program evaluation.* AU$6M extension program covering >2,400
+  livestock businesses (beef, sheep, goats) across ~1 million km² of
+  western Queensland rangeland, explicitly created because of the
+  drought-subsidy-reliance pattern noted above. Delivered via multi-agency
+  staff upskilling producers across three themes: grazing land management,
+  animal production, and "people-business" (the last being notable — a
+  named category for the non-technical, business/decision-making side of
+  grazing). Three independent surveys (2018-2020) found positive practice
+  change even through drought, flood, and COVID-19 disruption. This is
+  concrete evidence for the persona's "distributed, structured-extension"
+  advisor model (vs. horticulture's one-on-one agronomist) — the same
+  government-funded group-extension pattern as MLA's EDGEnetwork/BeefUp,
+  now with a specific, evaluated, large-scale example.
+
+- **Australian Wool Innovation (AWI) — grower extension networks and
+  Lifetime Ewe Management (LTEM) program**
+  [wool.com/awi-grower-networks](https://www.wool.com/training-extension/awi-grower-networks/)
+  — *Primary/program.* Six state-based woolgrower extension networks with
+  17,000+ members delivering workshops, field days, webinars — the same
+  group-extension adoption model as MLA's, run by the sheep-specific levy
+  body. Notably, uptake of the flagship LTEM best-practice training
+  program was reported at only **9.4% of AWI-eligible wool levy payers**
+  — a real, sourced adoption-rate figure (rare in this project's source
+  base so far, most of which describes programs without quantifying
+  uptake) and a useful benchmark for how much friction exists even in a
+  well-resourced, long-running extension model: if only ~1 in 10 eligible
+  levy payers complete a flagship program, that's a meaningful ceiling to
+  keep in mind when estimating how many graziers an AI-assisted version of
+  the same extension content might actually reach.
+
+- **NLIS (National Livestock Identification System) — as a farm
+  management tool, not just compliance**
+  [FutureBeef — "Using NLIS as a management tool"](https://futurebeef.com.au/resources/using-nlis-as-a-management-tool/)
+  (site blocked by this session's network egress proxy — title and topic
+  confirmed via search index only; **priority follow-up** to read
+  directly), [Integrity Systems / NLIS overview](https://www.integritysystems.com.au/identification--traceability/national-livestock-identification-system/)
+  — *Program/industry (partially unread).* NLIS compliance is mandatory
+  for all Australian red meat producers (even 1-2 head hobby operations),
+  administered by Integrity Systems Company (an MLA subsidiary), and the
+  database is explicitly positioned by industry material as usable for
+  more than compliance — a "centralized platform for tracking... records."
+  The existence of a FutureBeef resource specifically titled "Using NLIS
+  as a management tool" is itself a signal that the gap between
+  compliance-only use and actual management use (the persona's current
+  `[VALIDATE]` hypothesis) is a recognised industry issue worth extension
+  content in its own right — supporting, without yet confirming, the
+  hypothesis that most graziers under-use this data today.
+
 ---
 
 ## Priority follow-ups (not yet done)
@@ -267,3 +362,18 @@ Confidence key:
    (interviewing agronomists and suppliers alongside farmers, not just
    farmers) looks directly reusable for this project's own grower
    interviews (README task #1) — reflected in `research/interview-guide.md`.
+5. Read the FutureBeef "Using NLIS as a management tool" page directly
+   (blocked this session) to confirm whether it quantifies actual grazier
+   uptake, or is purely instructional.
+6. Read the CSIRO/UNE/CQUniversity destocking decision-support tool work
+   in more depth — it's close enough to
+   `opportunities/livestock-sale-timing-advisor.md` and
+   `opportunities/livestock-feed-position-tracking.md` that this project
+   should establish whether it's prior art to build on, partner with, or
+   deliberately differentiate from, before either card matures past Idea.
+7. Find a livestock-specific interview/case-study source with the same
+   depth as the QUT Darling Downs cotton study (direct grower quotes,
+   ecosystem interviews) — everything sourced for livestock so far is
+   program descriptions or aggregate data, not qualitative grower-level
+   research. This is the biggest remaining quality gap versus the
+   horticulture source base, not just a count gap.

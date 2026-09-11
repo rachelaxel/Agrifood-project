@@ -25,17 +25,26 @@ Step 5 of `research/persona-build-flow.md`.
   the persona's own economics data (ABARES income volatility, see
   `research/sources.md`) points at sale timing as plausibly the single
   largest lever in this persona's year — a stronger economic case than
-  either horticulture card can make with sourced data alone. Adoption
-  likelihood is rated lower than any horticulture card, deliberately:
-  horticulture's two highest-value cards (plan operationalisation, pest
-  detection) both have a named, sourced trust anchor — the agronomist.
-  This card's simulated-interview signal suggests the stock agent is the
-  closest analogue, but only for this specific decision, and that's still
-  unconfirmed; a wrong recommendation here also has higher stakes than a
-  wrong pest-ID call. High value with a shakier trust foundation is
-  exactly why this card is rated ⭐⭐⭐ on the strength of its value case,
-  not because its adoption risk is settled — the matrix intentionally
-  doesn't average these into a false middle score.
+  either horticulture card can make with sourced data alone. AI potential
+  is now rated slightly higher than in the original draft: MLA's National
+  Livestock Reporting Service means the market-data half of this
+  opportunity is already solved at industry scale, so this card's real
+  work (and its genuine differentiation) is synthesis — combining that
+  existing feed with the grazier's own feed-position and condition data —
+  a narrower, more achievable AI task than "source and predict market
+  movement from scratch." Adoption likelihood is still rated lower than
+  any horticulture card: horticulture's two highest-value cards (plan
+  operationalisation, pest detection) both have a named, sourced trust
+  anchor — the agronomist. This card's simulated-interview signal suggests
+  the stock agent is the closest analogue, but only for this specific
+  decision, and that's still unconfirmed; CSIRO's own sourced finding that
+  destocking decisions are driven by local pragmatism over structured data
+  (and a documented preference for drought subsidies over proactive
+  action) suggests real behavioural resistance to exactly this kind of
+  tool, not just an unproven trust anchor. High value with a shakier trust
+  foundation is exactly why this card is rated ⭐⭐⭐ on the strength of its
+  value case, not because its adoption risk is settled — the matrix
+  intentionally doesn't average these into a false middle score.
 
 ## Gaps in this matrix (larger than horticulture's, and why)
 

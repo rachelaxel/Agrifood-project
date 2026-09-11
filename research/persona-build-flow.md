@@ -88,7 +88,7 @@ STEP 8 — (Future) Real interview replaces simulated tier
 
 | Step | Horticulture | Livestock |
 |---|---|---|
-| 0. Desk research | Done — 8 sources logged | Done — 3 source entries logged |
+| 0. Desk research | Done — 8 sources logged | Done — 8 source entries logged (closed the count gap; see note below on remaining quality gap) |
 | 1. Persona | Done | Done |
 | 2. Journey | Done | Done |
 | 3. Opportunity cards | 3 cards | 2 cards |
@@ -97,12 +97,16 @@ STEP 8 — (Future) Real interview replaces simulated tier
 | 6. Simulated interview | Done (01) | Done (01) |
 | 7. Feedback | Done | Done |
 
-Livestock is now at the same step-count as horticulture (this file's own
-gap analysis triggered `matrix/livestock-opportunity-matrix.md` and
-`opportunities/livestock-feed-position-tracking.md`), though with one
-fewer opportunity card overall and a materially thinner desk-research base
-(3 vs. 8 sources). Closing that source-count gap, or starting a third
-persona, are the two live options rather than a forced next step.
+Livestock is now at the same step-count as horticulture, and the same
+source *count* (8 each). The remaining gap is **quality, not quantity**:
+horticulture's source base includes the QUT Darling Downs case study —
+direct qualitative research with grower/agronomist quotes. Every
+livestock source added to close the count gap (MLA NLRS, CSIRO drought
+research, GrazingFutures, AWI) is a program description or aggregate
+survey data — real and useful, but none of it is grower-level qualitative
+research the way QUT's case study is. That's logged as priority follow-up
+#7 in `research/sources.md` and is the honest remaining gap between the
+two personas, more consequential than the count was.
 
 ## What this flow does NOT include (yet)
 

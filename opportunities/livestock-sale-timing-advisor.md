@@ -17,7 +17,20 @@ synthesised market-timing signals to act on.
 **Current behaviour** (hypothesised — `[VALIDATE]`): Grower checks several
 separate sources (stock agent, saleyard reports, weather/season outlook,
 neighbour conversations) and makes a judgement call, likely under time
-pressure if feed is running out or an agent's window is closing.
+pressure if feed is running out or an agent's window is closing. **Now
+partly grounded** (see `research/sources.md`): the market-data half of
+this isn't actually fragmented at the source — MLA's National Livestock
+Reporting Service already centrally collects and publishes current
+saleyard/price data across ~70 markets/week with an interactive online
+tool. This shifts the real opportunity away from "aggregate scattered
+market sources" and toward **combining that already-good market feed with
+the grower's own feed/condition data**, which nothing currently does
+(reframes the AI intervention below accordingly). Separately, CSIRO
+drought-resilience research found producer destocking decisions are driven
+more by local knowledge/pragmatism than structured data, with a documented
+tendency to rely on drought subsidies over proactive destocking — a
+sourced version of the "decided from the gut under pressure" pattern this
+card was already designed around.
 
 **AI intervention**: *Predict* + *summarise* + *recommend*. Combine
 current stock condition/weight trajectory (from the grazier's own
@@ -80,7 +93,15 @@ grower sells at a loss having relied on the tool's read of the market.
 from the same channels the grower already checks (saleyard reports,
 processor grids) rather than a proprietary model, so the tool's credibility
 rests on data currency and synthesis quality, not a novel prediction claim
-it would need to prove out over time.
+it would need to prove out over time. Concretely, this means integrating
+with MLA's NLRS data (see `research/sources.md`) rather than building a
+competing market-data source — MLA/Integrity Systems already carries the
+credibility and coverage a new entrant would need years to replicate.
+CSIRO's own destocking-tool research program (Future Drought Fund-funded)
+is close enough to this card and
+`opportunities/livestock-feed-position-tracking.md` that a build-vs-
+partner decision with that program specifically should happen before
+either card matures past Idea.
 
 **Potential value**:
 - Avoiding forced/distressed sales at depressed prices (e.g. drought

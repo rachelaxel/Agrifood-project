@@ -72,7 +72,14 @@
    digital data trail here purely from regulatory requirement.
    `[VALIDATE]` whether the grower actually uses that NLIS data for
    anything beyond the minimum compliance requirement, or whether it's
-   pure box-ticking disconnected from day-to-day decisions.
+   pure box-ticking disconnected from day-to-day decisions. Weak
+   supporting signal (see `research/sources.md` — page itself not yet
+   directly read, blocked by network proxy): a FutureBeef extension
+   resource titled "Using NLIS as a management tool" exists specifically
+   to address this gap, which suggests the industry itself treats
+   compliance-only NLIS use as a common, recognised pattern worth
+   correcting — consistent with, but not proof of, this persona's
+   hypothesis.
 5. **Advisor/vet involvement (periodic, likely less frequent than
    horticulture's agronomist cadence)**: `[VALIDATE]` — MLA's adoption
    model is built around structured group extension (Profitable Grazing
@@ -107,7 +114,20 @@
 - Time sales to the market and season rather than being forced to sell
   under duress (e.g. destocking in drought at depressed prices) — given
   the income volatility noted above, this is plausibly the single highest-
-  stakes recurring decision in this persona's year. `[VALIDATE]`.
+  stakes recurring decision in this persona's year. Now partly grounded,
+  not just hypothesised: CSIRO/UNE/CQUniversity drought-resilience research
+  (Future Drought Fund-funded, see `research/sources.md`) found producer
+  destocking decisions are "strongly framed in terms of local knowledge
+  and pragmatism, not necessarily detailed climate information," and
+  documented a pattern of producers **relying on drought subsidies rather
+  than proactive planning and timely destocking** in low-rainfall years —
+  a real, sourced version of the "held in the head, not referenced against
+  structured data" pattern the simulated interview also surfaced. CSIRO is
+  actively building digital destocking/restocking decision tools combining
+  pasture growth and herd economic models — close enough to
+  `opportunities/livestock-sale-timing-advisor.md` and
+  `opportunities/livestock-feed-position-tracking.md` that it should be
+  treated as prior art/a potential partner, not overlooked competition.
 - Manage a mobile, living asset across (often) a much larger and more
   variable-condition land area than a horticulture block, with less
   ability to directly instrument every animal individually.
@@ -207,6 +227,26 @@ aggregate/personalise generic extension content to the specific property,
 which is a different kind of AI opportunity (interpretation/personalisation
 of general knowledge) than the horticulture persona's
 "extend-the-agronomist" framing.
+
+**Now grounded beyond a single MLA citation** (see `research/sources.md`):
+the same distributed, government/RDC-funded group-extension model shows up
+independently at scale in **GrazingFutures** (a $6M Queensland DAF program,
+2016-2022, covering 2,400+ beef/sheep/goat businesses across ~1 million
+km² of western Queensland rangeland, with three independent surveys
+2018-2020 showing measured practice change) and in **Australian Wool
+Innovation's** six state-based woolgrower extension networks (17,000+
+members). This is stronger evidence for "distributed extension, not a
+single agronomist-equivalent" than the earlier MLA-only citation gave —
+though it's still evidence of *program existence and scale*, not direct
+proof that an individual grazier lacks a trusted property-specific
+advisor, which remains the open question a real interview needs to settle.
+
+A genuinely useful, sourced adoption benchmark: AWI reported only **9.4%
+of eligible wool levy payers** had completed its flagship Lifetime Ewe
+Management best-practice training — even a well-funded, long-running,
+free extension program reaches a small minority of the eligible
+population. Any AI-assisted version of similar extension content should
+be judged against this real ceiling, not an assumed high baseline reach.
 
 **Simulated-interview signal (not confirmed — see
 `research/interviews/livestock-grazier-simulated-01.md`, Simulated/synthetic

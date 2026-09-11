@@ -70,10 +70,16 @@ position as "helping you check the number you're already carrying in your
 head," not replacing the grazier's own judgement.
 
 **Adoption barrier — organisational**: This overlaps functionally with
-existing commercial grazing/pasture tools — worth explicitly deciding
-whether this is a build-vs-partner-vs-integrate decision before treating
-it as a from-scratch opportunity, more so than any other card across
-either persona so far.
+existing commercial grazing/pasture tools *and* with a live, credible
+research program — CSIRO/UNE/CQUniversity's Future Drought Fund-funded
+work combining pasture growth models with herd economic models for
+destocking/restocking decisions (see `research/sources.md`) is close
+enough to this card's core idea that it should be treated as prior art to
+connect with, not independently discovered competition. Worth explicitly
+deciding whether this is a build-vs-partner-vs-integrate decision — with
+either the commercial tools or the CSIRO program — before treating it as
+a from-scratch opportunity, more so than any other card across either
+persona so far.
 
 **Adoption mechanism — organisational**: Scope the differentiation
 narrowly — the value-add here isn't pasture measurement itself (existing
