@@ -65,20 +65,70 @@
   }
 
   *{box-sizing:border-box;}
-  body{background:var(--bg); color:var(--ink); font-family:'Source Sans 3', system-ui, sans-serif; line-height:1.5;}
+  html{background:var(--bg);}
+  body{
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(1100px 620px at 88% -8%, color-mix(in srgb, var(--accent-hort) 13%, transparent), transparent 60%),
+      radial-gradient(900px 560px at -6% 106%, color-mix(in srgb, var(--accent-live) 12%, transparent), transparent 60%),
+      repeating-linear-gradient(115deg, color-mix(in srgb, var(--ink) 3%, transparent) 0px, transparent 1.4px, transparent 30px),
+      repeating-linear-gradient(115deg, transparent 0 15px, color-mix(in srgb, var(--surface) 35%, transparent) 15px 15.6px);
+    background-attachment:fixed;
+    color:var(--ink); font-family:'Source Sans 3', system-ui, sans-serif; line-height:1.5;
+  }
   h1,h2,h3,h4{font-family:'Source Serif 4', Georgia, serif; font-weight:600; text-wrap:balance; color:var(--ink); margin:0;}
   .mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
   a{color:var(--accent-hort-ink);}
   button{font-family:inherit;}
 
-  .app{max-width:1180px; margin:0 auto; padding:0 20px; padding-block:28px 64px;}
+  .app{max-width:840px; margin:0 auto; padding:0 20px; padding-block:36px 70px; display:flex; flex-direction:column; gap:46px;}
+
+  .eyebrow{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px; margin:0 0 10px;}
+  .eyebrow .step-n{display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid var(--border-strong); font-size:.66rem; color:var(--ink-2);}
 
   /* ---------- Header ---------- */
-  .topbar{display:flex; flex-wrap:wrap; gap:20px; align-items:flex-end; justify-content:space-between; padding-bottom:22px; border-bottom:1px solid var(--border); margin-bottom:24px;}
-  .brand-eyebrow{font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px;}
-  .brand h1{font-size:2.1rem; letter-spacing:-.01em;}
-  .brand p{margin:8px 0 0; max-width:52ch; color:var(--ink-2); font-size:.98rem;}
-  .confidence-key{display:flex; flex-wrap:wrap; gap:10px 16px; font-size:.78rem; color:var(--muted); max-width:360px;}
+  .masthead{text-align:left;}
+  .masthead h1{font-size:clamp(2rem,5vw,2.5rem); letter-spacing:-.01em;}
+  .masthead p{margin:12px 0 0; max-width:60ch; color:var(--ink-2); font-size:1.02rem;}
+
+  /* ---------- Persona switcher ---------- */
+  .persona-switcher{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:560px){ .persona-switcher{grid-template-columns:1fr;} }
+  .persona-tab{
+    text-align:left; border:1.5px solid var(--border); background:var(--surface);
+    border-radius:14px; padding:18px 20px; cursor:pointer; display:flex; flex-direction:column; gap:10px;
+    transition:border-color .15s, box-shadow .15s, transform .1s; box-shadow:var(--shadow);
+  }
+  .persona-tab:hover{border-color:var(--tab-accent); transform:translateY(-1px);}
+  .persona-tab .pt-name{font-family:'Source Serif 4'; font-weight:600; font-size:1.14rem;}
+  .persona-tab .pt-sub{font-size:.82rem; color:var(--muted);}
+  .persona-tab .pt-stat{display:flex; align-items:baseline; gap:8px; margin-top:2px; padding-top:12px; border-top:1px dashed var(--border);}
+  .persona-tab .pt-stat b{font-family:'Source Serif 4'; font-size:1.5rem; font-variant-numeric:tabular-nums; color:var(--tab-accent-ink);}
+  .persona-tab .pt-stat span{font-size:.76rem; color:var(--muted); line-height:1.25;}
+  .persona-tab[data-active="true"]{border-color:var(--tab-accent); box-shadow:0 0 0 3px var(--tab-tint), var(--shadow);}
+
+  /* ---------- Persona hero ---------- */
+  .persona-hero{border:1px solid var(--border); background:var(--surface); border-radius:16px; padding:26px 28px; box-shadow:var(--shadow); border-top:4px solid var(--tab-accent);}
+  .ph-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:flex-start;}
+  .ph-top h2{font-size:1.5rem;}
+  .persona-pill{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; padding:4px 9px; border-radius:999px; color:#fff; background:var(--tab-accent); white-space:nowrap;}
+  .ph-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:20px;}
+  .ph-field dt{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:5px;}
+  .ph-field dd{margin:0; font-size:.92rem; color:var(--ink-2);}
+  .trigger-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:22px;}
+  @media (max-width:560px){ .trigger-grid{grid-template-columns:1fr;} }
+  .trigger-box{border:1px solid var(--border); border-radius:10px; padding:14px 16px; background:var(--surface-2);}
+  .trigger-box h4{font-family:'Source Sans 3'; font-size:.76rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:700;}
+  .trigger-box ul{margin:9px 0 0; padding-left:18px; font-size:.86rem; color:var(--ink-2);}
+  .trigger-box li + li{margin-top:6px;}
+
+  /* ---------- Section shell ---------- */
+  section.block{display:flex; flex-direction:column; gap:4px;}
+  .section-head h2{font-size:1.4rem;}
+  .section-head .hint{font-size:.9rem; color:var(--muted); max-width:58ch; margin-top:8px;}
+
+  /* ---------- Confidence legend ---------- */
+  .confidence-key{display:flex; flex-wrap:wrap; gap:8px 18px; font-size:.78rem; color:var(--muted); margin-top:14px; padding:12px 16px; border:1px solid var(--border); border-radius:10px; background:var(--surface-2);}
   .confidence-key .ck-item{display:flex; align-items:center; gap:6px; white-space:nowrap;}
   .ck-dot{width:9px; height:9px; border-radius:50%; flex:none; border:1.5px solid var(--border-strong); background:var(--surface-2);}
   .ck-dot.solid{background:var(--ink-2); border-color:var(--ink-2);}
@@ -86,140 +136,116 @@
   .ck-dot.dashed{background:transparent; border-style:dashed; border-color:var(--flag);}
   .ck-dot.dotted{background:transparent; border-style:dotted; border-color:var(--muted);}
 
-  /* ---------- Layout ---------- */
-  .layout{display:grid; grid-template-columns:220px 1fr; gap:28px; align-items:start;}
-  @media (max-width:760px){ .layout{grid-template-columns:1fr;} }
-
-  .rail{position:sticky; top:20px; display:flex; flex-direction:column; gap:14px;}
-  @media (max-width:760px){ .rail{position:static;} }
-  .rail-label{font-family:'IBM Plex Mono'; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
-  .persona-tabs{display:flex; flex-direction:column; gap:8px;}
-  @media (max-width:760px){ .persona-tabs{flex-direction:row; flex-wrap:wrap;} }
-  .persona-tab{
-    text-align:left; border:1px solid var(--border); background:var(--surface);
-    border-radius:var(--radius); padding:12px 14px; cursor:pointer; display:flex; flex-direction:column; gap:4px;
-    transition:border-color .15s, background .15s;
-  }
-  .persona-tab:hover{border-color:var(--border-strong);}
-  .persona-tab .pt-name{font-weight:600; font-size:.95rem;}
-  .persona-tab .pt-sub{font-size:.76rem; color:var(--muted); line-height:1.3;}
-  .persona-tab[data-active="true"]{background:var(--tab-tint); border-color:var(--tab-accent); box-shadow:inset 0 0 0 1px var(--tab-accent);}
-  .persona-tab[data-active="true"] .pt-name{color:var(--tab-accent-ink);}
-  .rail-stat{border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); padding:12px 14px;}
-  .rail-stat .rs-figure{font-family:'Source Serif 4'; font-size:1.5rem; font-variant-numeric:tabular-nums; line-height:1.1;}
-  .rail-stat .rs-label{font-size:.74rem; color:var(--muted); margin-top:4px;}
-
-  main.content{display:flex; flex-direction:column; gap:34px; min-width:0;}
-
-  /* ---------- Persona hero ---------- */
-  .persona-hero{border:1px solid var(--border); background:var(--surface); border-radius:14px; padding:22px 24px; box-shadow:var(--shadow);}
-  .ph-top{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:flex-start;}
-  .ph-top h2{font-size:1.4rem;}
-  .persona-pill{display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; padding:4px 9px; border-radius:999px; color:#fff; background:var(--tab-accent);}
-  .ph-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:16px;}
-  .ph-field dt{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px;}
-  .ph-field dd{margin:0; font-size:.92rem; color:var(--ink-2);}
-  .trigger-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px;}
-  @media (max-width:560px){ .trigger-grid{grid-template-columns:1fr;} }
-  .trigger-box{border:1px solid var(--border); border-radius:8px; padding:12px 14px; background:var(--surface-2);}
-  .trigger-box h4{font-family:'Source Sans 3'; font-size:.78rem; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); font-weight:700;}
-  .trigger-box ul{margin:8px 0 0; padding-left:18px; font-size:.86rem; color:var(--ink-2);}
-  .trigger-box li + li{margin-top:5px;}
-
-  /* ---------- Journey ---------- */
-  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
-  .section-head h2{font-size:1.3rem;}
-  .section-head .hint{font-size:.82rem; color:var(--muted); max-width:46ch;}
-
-  .spine{display:flex; overflow-x:auto; gap:0; margin-top:16px; padding-bottom:6px; scrollbar-width:thin;}
-  .spine-node{flex:1 0 108px; display:flex; flex-direction:column; align-items:stretch; position:relative; min-width:108px;}
-  .spine-node .connector{position:absolute; top:17px; left:-50%; width:100%; height:2px; background:var(--border-strong); z-index:0;}
-  .spine-node:first-child .connector{display:none;}
-  .spine-btn{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:8px; background:none; border:none; cursor:pointer; padding:0 6px;}
-  .spine-num{width:34px; height:34px; border-radius:50%; border:2px solid var(--border-strong); background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono'; font-size:.75rem; color:var(--ink-2); flex:none;}
+  /* ---------- Journey spine ---------- */
+  .spine-track{position:relative; margin-top:26px; padding-top:6px;}
+  .spine-line{position:absolute; top:29px; left:22px; right:22px; height:2px; background:var(--border-strong); z-index:0;}
+  .spine{display:flex; overflow-x:auto; gap:2px; position:relative; z-index:1; padding-bottom:4px;}
+  .spine-node{flex:1 0 84px; min-width:84px; display:flex; flex-direction:column; align-items:center;}
+  .spine-btn{display:flex; flex-direction:column; align-items:center; gap:10px; background:none; border:none; cursor:pointer; padding:2px 4px; width:100%;}
+  .spine-num{width:44px; height:44px; border-radius:50%; border:2px solid var(--border-strong); background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono'; font-size:.78rem; color:var(--ink-2); flex:none; position:relative; transition:border-color .15s, background .15s;}
   .spine-btn[aria-pressed="true"] .spine-num{border-color:var(--tab-accent); background:var(--tab-accent); color:#fff;}
-  .spine-node.has-friction .spine-num::after{content:''; position:absolute; width:8px; height:8px; border-radius:50%; background:var(--flag); border:1.5px solid var(--surface); transform:translate(11px,-11px);}
-  .spine-label{font-size:.76rem; text-align:center; color:var(--ink-2); font-weight:600; line-height:1.2;}
+  .spine-node.has-friction .spine-num::after{content:''; position:absolute; width:9px; height:9px; border-radius:50%; background:var(--flag); border:2px solid var(--bg-behind, var(--surface)); top:-3px; right:-3px;}
+  .spine-label{font-size:.78rem; text-align:center; color:var(--ink-2); font-weight:600; line-height:1.2;}
 
-  .stage-detail{margin-top:18px; border:1px solid var(--border); border-radius:12px; background:var(--surface); padding:20px 22px; box-shadow:var(--shadow);}
-  .stage-detail h3{font-size:1.05rem; margin-bottom:8px;}
-  .stage-detail > p.desc{color:var(--ink-2); font-size:.92rem; margin:0 0 14px;}
-  .friction-item{border-top:1px dashed var(--border); padding-top:14px; margin-top:14px;}
+  .stage-detail{margin-top:0; border:1px solid var(--border); border-radius:14px; background:var(--surface); padding:24px 26px; box-shadow:var(--shadow); position:relative;}
+  .stage-detail::before{content:''; position:absolute; top:-9px; left:50%; width:16px; height:16px; background:var(--surface); border-left:1px solid var(--border); border-top:1px solid var(--border); transform:translateX(-50%) rotate(45deg);}
+  .stage-detail h3{font-size:1.12rem; margin-bottom:9px;}
+  .stage-detail > p.desc{color:var(--ink-2); font-size:.94rem; margin:0 0 16px;}
+  .friction-item{border-top:1px dashed var(--border); padding-top:16px; margin-top:16px;}
   .friction-item:first-of-type{border-top:none; padding-top:0; margin-top:0;}
-  .fi-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  @media (max-width:640px){ .fi-row{grid-template-columns:1fr;} }
-  .fi-label{font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px; display:flex; align-items:center; gap:6px;}
-  .fi-text{font-size:.88rem; color:var(--ink-2);}
-  .opp-link{display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-size:.8rem; font-weight:600; padding:5px 10px; border-radius:7px; border:1px solid var(--tab-accent); color:var(--tab-accent-ink); background:var(--tab-tint); cursor:pointer;}
+  .fi-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:600px){ .fi-row{grid-template-columns:1fr;} }
+  .fi-label{font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:5px; display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .fi-text{font-size:.89rem; color:var(--ink-2);}
+  .opp-link{display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-size:.82rem; font-weight:600; padding:7px 12px; border-radius:8px; border:1px solid var(--tab-accent); color:var(--tab-accent-ink); background:var(--tab-tint); cursor:pointer;}
+  .no-friction{color:var(--muted); font-style:italic; font-size:.9rem;}
 
   /* ---------- Confidence tag ---------- */
   .tag-confidence{display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--muted);}
 
   /* ---------- Opportunity cards ---------- */
-  .opp-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px; margin-top:16px;}
-  .opp-card{border:1px solid var(--border); background:var(--surface); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; box-shadow:var(--shadow); cursor:pointer;}
-  .opp-card h3{font-size:1rem;}
-  .opp-card .oc-stage{font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono';}
+  .opp-grid{display:grid; grid-template-columns:1fr; gap:16px; margin-top:20px;}
+  .opp-card{border:1px solid var(--border); background:var(--surface); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:12px; box-shadow:var(--shadow); cursor:pointer; transition:border-color .15s, transform .1s;}
+  .opp-card:hover{border-color:var(--tab-accent); transform:translateY(-1px);}
+  .opp-card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .opp-card h3{font-size:1.06rem;}
+  .opp-card .oc-stage{font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono'; margin-bottom:5px;}
   .oc-tags{display:flex; flex-wrap:wrap; gap:6px;}
-  .oc-tag{font-size:.7rem; padding:3px 8px; border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
-  .oc-problem{font-size:.85rem; color:var(--ink-2);}
-  .oc-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:8px; border-top:1px solid var(--border); font-size:.76rem;}
-  .maturity-chip{font-family:'IBM Plex Mono'; padding:2px 8px; border-radius:6px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
-  .stars{color:var(--tab-accent); letter-spacing:1px; font-size:.8rem;}
+  .oc-tag{font-size:.7rem; padding:3px 9px; border-radius:999px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
+  .oc-problem{font-size:.87rem; color:var(--ink-2);}
+  .oc-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:10px; border-top:1px solid var(--border); font-size:.78rem;}
+  .maturity-chip{font-family:'IBM Plex Mono'; padding:3px 9px; border-radius:6px; background:var(--surface-2); border:1px solid var(--border); color:var(--ink-2);}
+  .stars{color:var(--tab-accent); letter-spacing:1px; font-size:.85rem;}
+  .see-more{font-size:.8rem; font-weight:600; color:var(--tab-accent-ink); white-space:nowrap;}
 
   /* ---------- Modal ---------- */
-  .modal-back{position:fixed; inset:0; background:rgba(20,24,16,.5); display:none; align-items:flex-start; justify-content:center; padding:5vh 16px; z-index:50; overflow-y:auto;}
+  .modal-back{position:fixed; inset:0; background:rgba(20,24,16,.55); display:none; align-items:flex-start; justify-content:center; padding:5vh 16px; z-index:50; overflow-y:auto;}
   .modal-back[data-open="true"]{display:flex;}
-  .modal{background:var(--surface); border-radius:14px; max-width:680px; width:100%; padding:26px 28px 30px; box-shadow:0 24px 60px -12px rgba(0,0,0,.4); border:1px solid var(--border); margin-bottom:5vh;}
+  .modal{background:var(--surface); border-radius:16px; max-width:660px; width:100%; padding:28px 30px 32px; box-shadow:0 24px 60px -12px rgba(0,0,0,.4); border:1px solid var(--border); border-top:4px solid var(--tab-accent); margin-bottom:5vh;}
   .modal-head{display:flex; justify-content:space-between; align-items:flex-start; gap:14px;}
-  .modal-head h3{font-size:1.25rem;}
-  .modal-close{border:none; background:var(--surface-2); border-radius:8px; width:30px; height:30px; font-size:1rem; cursor:pointer; color:var(--ink-2); flex:none;}
-  .modal-meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
-  .modal-section{margin-top:16px;}
-  .modal-section h4{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:700; margin-bottom:6px;}
-  .modal-section p, .modal-section li{font-size:.9rem; color:var(--ink-2);}
+  .modal-head h3{font-size:1.3rem;}
+  .modal-close{border:none; background:var(--surface-2); border-radius:8px; width:32px; height:32px; font-size:1rem; cursor:pointer; color:var(--ink-2); flex:none;}
+  .modal-meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .modal-section{margin-top:18px;}
+  .modal-section h4{font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:700; margin-bottom:7px;}
+  .modal-section p, .modal-section li{font-size:.91rem; color:var(--ink-2);}
   .modal-section ul{margin:0; padding-left:18px;}
-  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
   @media (max-width:520px){ .two-col{grid-template-columns:1fr;} }
-  .modal-source{margin-top:18px; padding-top:14px; border-top:1px solid var(--border); font-size:.78rem; color:var(--muted);}
+  .modal-source{margin-top:20px; padding-top:16px; border-top:1px solid var(--border); font-size:.79rem; color:var(--muted);}
 
   /* ---------- Matrix ---------- */
-  .matrix-wrap{border:1px solid var(--border); background:var(--surface); border-radius:14px; padding:22px 24px; margin-top:16px; box-shadow:var(--shadow);}
+  .matrix-wrap{border:1px solid var(--border); background:var(--surface); border-radius:16px; padding:24px 26px; margin-top:20px; box-shadow:var(--shadow);}
   .matrix-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;}
-  .view-toggle{display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden;}
-  .view-toggle button{padding:6px 12px; font-size:.8rem; border:none; background:var(--surface); color:var(--ink-2); cursor:pointer;}
+  .view-toggle{display:flex; border:1px solid var(--border); border-radius:9px; overflow:hidden;}
+  .view-toggle button{padding:7px 14px; font-size:.82rem; border:none; background:var(--surface); color:var(--ink-2); cursor:pointer;}
   .view-toggle button[aria-pressed="true"]{background:var(--ink); color:var(--surface);}
-  .chart-caption{font-size:.78rem; color:var(--muted); margin-top:10px; max-width:70ch;}
-  .legend-row{display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:.8rem; color:var(--ink-2);}
-  .legend-row span{display:inline-flex; align-items:center; gap:6px;}
+  .chart-caption{font-size:.8rem; color:var(--muted); margin-top:12px; max-width:70ch;}
+  .legend-row{display:flex; gap:20px; flex-wrap:wrap; font-size:.85rem; color:var(--ink-2);}
+  .legend-row span{display:inline-flex; align-items:center; gap:7px;}
   .legend-swatch{width:11px; height:11px; border-radius:50%; display:inline-block;}
-  table.data-table{width:100%; border-collapse:collapse; font-size:.84rem; margin-top:14px;}
-  table.data-table th, table.data-table td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); vertical-align:top;}
+  table.data-table{width:100%; border-collapse:collapse; font-size:.85rem; margin-top:16px;}
+  table.data-table th, table.data-table td{text-align:left; padding:9px 11px; border-bottom:1px solid var(--border); vertical-align:top;}
   table.data-table th{font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:700;}
   .table-scroll{overflow-x:auto;}
   #tooltip{position:fixed; pointer-events:none; background:var(--ink); color:var(--surface); padding:8px 10px; border-radius:8px; font-size:.78rem; max-width:230px; box-shadow:0 8px 20px rgba(0,0,0,.3); opacity:0; transition:opacity .1s; z-index:60;}
 
   /* ---------- Process footer ---------- */
-  .process-footer{margin-top:40px; border-top:1px solid var(--border); padding-top:22px;}
-  .process-footer summary{cursor:pointer; font-family:'Source Serif 4'; font-size:1.05rem; font-weight:600; list-style:none; display:flex; align-items:center; gap:8px;}
+  .process-footer{border-top:1px solid var(--border); padding-top:26px;}
+  .process-footer summary{cursor:pointer; font-family:'Source Serif 4'; font-size:1.08rem; font-weight:600; list-style:none; display:flex; align-items:center; gap:8px;}
   .process-footer summary::-webkit-details-marker{display:none;}
-  .process-footer summary::before{content:'→'; display:inline-block; transition:transform .15s; color:var(--tab-accent, var(--accent-hort));}
+  .process-footer summary::before{content:'→'; display:inline-block; transition:transform .15s; color:var(--accent-hort);}
   .process-footer[open] summary::before{transform:rotate(90deg);}
-  .flow-strip{display:flex; overflow-x:auto; gap:0; margin-top:16px; padding-bottom:8px;}
+  .flow-strip{display:flex; overflow-x:auto; gap:0; margin-top:18px; padding-bottom:8px;}
   .flow-step{flex:1 0 132px; min-width:132px; padding:0 10px; position:relative;}
   .flow-step:not(:first-child)::before{content:''; position:absolute; top:11px; left:-10px; width:20px; height:1px; background:var(--border-strong);}
   .flow-step .fs-n{font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--muted);}
   .flow-step .fs-t{font-size:.82rem; font-weight:600; margin-top:4px;}
   .flow-step .fs-d{font-size:.76rem; color:var(--muted); margin-top:3px; line-height:1.3;}
-  .footer-note{font-size:.8rem; color:var(--muted); margin-top:16px; max-width:74ch;}
+  .footer-note{font-size:.82rem; color:var(--muted); margin-top:18px; max-width:74ch;}
 </style>
 
 <div class="app">
-  <header class="topbar">
-    <div class="brand">
-      <p class="brand-eyebrow">AgriFood AI Adoption Project — discovery platform</p>
-      <h1>Groundtruth</h1>
-      <p>What Australian growers actually observe, decide, and do — mapped stage by stage, with every claim traced to a source or flagged as a hypothesis still waiting on one.</p>
+  <header class="masthead">
+    <p class="eyebrow">AgriFood AI Adoption Project</p>
+    <h1>Groundtruth</h1>
+    <p>What Australian growers actually observe, decide, and do — mapped stage by stage, with every claim traced to a source or flagged as a hypothesis still waiting on one.</p>
+  </header>
+
+  <section class="block">
+    <p class="eyebrow"><span class="step-n">1</span>Pick a commodity</p>
+    <div class="persona-switcher" id="personaTabs"></div>
+  </section>
+
+  <section class="block">
+    <div id="personaHero"></div>
+  </section>
+
+  <section class="block" id="journeySection">
+    <p class="eyebrow"><span class="step-n">2</span>The journey, stage by stage</p>
+    <div class="section-head">
+      <h2>Same nine stages, every commodity</h2>
+      <p class="hint">Click a stage to see the friction point mapped there, and where it points, an AI opportunity card. The gold dot marks a stage with something mapped.</p>
     </div>
     <div class="confidence-key" aria-label="Confidence key">
       <span class="ck-item"><span class="ck-dot solid"></span>Primary / quantitative source</span>
@@ -228,66 +254,45 @@
       <span class="ck-item"><span class="ck-dot dashed"></span>Simulated interview (synthetic)</span>
       <span class="ck-item">? Unvalidated — <span class="mono">[VALIDATE]</span></span>
     </div>
-  </header>
+    <div class="spine-track">
+      <div class="spine-line"></div>
+      <div class="spine" id="spine"></div>
+    </div>
+    <div class="stage-detail" id="stageDetail" style="margin-top:22px;"></div>
+  </section>
 
-  <div class="layout">
-    <aside class="rail">
-      <div>
-        <p class="rail-label">Select commodity</p>
-        <div class="persona-tabs" id="personaTabs"></div>
+  <section class="block" id="oppSection">
+    <p class="eyebrow"><span class="step-n">3</span>AI opportunity cards</p>
+    <div class="section-head">
+      <h2>What the friction points above turned into</h2>
+      <p class="hint">Every card names the AI move, the workflow it triggers, who stays in the loop, and — mandatory, not optional — what would stop a farmer or an organisation adopting it.</p>
+    </div>
+    <div class="opp-grid" id="oppGrid"></div>
+  </section>
+
+  <section class="block" id="matrixSection">
+    <p class="eyebrow"><span class="step-n">4</span>Cross-commodity matrix</p>
+    <div class="section-head">
+      <h2>All five opportunities, one plot</h2>
+      <p class="hint">Scores are first-pass judgement calls awaiting real interviews, not measured data.</p>
+    </div>
+    <div class="matrix-wrap">
+      <div class="matrix-top">
+        <div class="legend-row" id="matrixLegend"></div>
+        <div class="view-toggle" role="group" aria-label="Matrix view">
+          <button id="viewChartBtn" aria-pressed="true">Plot</button>
+          <button id="viewTableBtn" aria-pressed="false">Table</button>
+        </div>
       </div>
-      <div class="rail-stat" id="railStat"></div>
-      <div class="rail-stat">
-        <div class="rs-label" style="margin-top:0;">Sources logged</div>
-        <div class="rs-figure">16</div>
-        <div class="rs-label">across both personas — see the project's <span class="mono">research/sources.md</span></div>
-      </div>
-    </aside>
-
-    <main class="content">
-      <section class="persona-hero" id="personaHero"></section>
-
-      <section id="journeySection">
-        <div class="section-head">
-          <h2>The journey, stage by stage</h2>
-          <p class="hint">Same nine-stage spine for every commodity, so personas stay comparable. The dot marks a stage with a mapped friction point — click any stage.</p>
-        </div>
-        <div class="spine" id="spine"></div>
-        <div class="stage-detail" id="stageDetail"></div>
-      </section>
-
-      <section id="oppSection">
-        <div class="section-head">
-          <h2>AI opportunity cards</h2>
-          <p class="hint">Every card names the AI move, the workflow it triggers, who stays in the loop, and — mandatory, not optional — what would stop a farmer or an organisation adopting it.</p>
-        </div>
-        <div class="opp-grid" id="oppGrid"></div>
-      </section>
-
-      <section id="matrixSection">
-        <div class="section-head">
-          <h2>Cross-commodity opportunity matrix</h2>
-          <p class="hint">All five opportunity cards on one plot. Scores are first-pass judgement calls awaiting real interviews, not measured data.</p>
-        </div>
-        <div class="matrix-wrap">
-          <div class="matrix-top">
-            <div class="legend-row" id="matrixLegend"></div>
-            <div class="view-toggle" role="group" aria-label="Matrix view">
-              <button id="viewChartBtn" aria-pressed="true">Plot</button>
-              <button id="viewTableBtn" aria-pressed="false">Table</button>
-            </div>
-          </div>
-          <div id="chartHolder"></div>
-          <div id="tableHolder" style="display:none;"></div>
-          <p class="chart-caption">Bubble size = ease of shipping (larger = lower workflow complexity). Position = farmer value against adoption likelihood, both ordinal judgement calls from the opportunity cards' own adoption fields.</p>
-        </div>
-      </section>
-    </main>
-  </div>
+      <div id="chartHolder"></div>
+      <div id="tableHolder" style="display:none;"></div>
+      <p class="chart-caption">Bubble size = ease of shipping (larger = lower workflow complexity).</p>
+    </div>
+  </section>
 
   <details class="process-footer">
     <summary>How this data actually gets built (it isn't a database yet)</summary>
-    <p class="footer-note">Every persona on this page is produced by the same eight-step pass: desk research first, a persona, a journey map, opportunity cards, workflow diagrams only where branching logic exists, a scored matrix, an AI-simulated interview against the gaps, then the findings fed back by hand. Right now that whole pipeline runs as markdown files in a git repo, authored in conversation — this page is a rendered view bolted on afterward, not the system of record. The repo's own <span class="mono">PROCESS.md</span> is explicit about the gap: nothing here is computed from a schema, cross-references are kept in sync by memory, and there is still no intake path for a real grower interview to replace a simulated one.</p>
+    <p class="footer-note">Every persona on this page is produced by the same eight-step pass: desk research first, a persona, a journey map, opportunity cards, workflow diagrams only where branching logic exists, a scored matrix, an AI-simulated interview against the gaps, then the findings fed back by hand. Right now that whole pipeline runs as markdown files in a git repo, authored in conversation — this page is a rendered view bolted on afterward, not the system of record. Updating a persona file won't update this page automatically yet.</p>
     <div class="flow-strip" id="flowStrip"></div>
   </details>
 </div>
@@ -322,7 +327,7 @@
         structure:'Owner-operator + 1–3 permanent staff, seasonal harvest crew, contracted agronomist (visits ~2–6 weekly in-season)',
         economics:'~$105.8k → $122k avg farm cash income, irrigated MDB horticulture (ABARES, 2014–15→2015–16 — dated). Only ~16% of hort farms cleared a 10%+ return in 2015–16, mostly large multi-crop operations.'
       },
-      statFigure:'$1.3B', statLabel:'Almond sector value, 2024–25 (ABS), +19.6% on prior year — the pilot sub-sector for this persona',
+      statFigure:'$1.3B', statLabel:'Almond sector value, 2024–25 · +19.6% on prior year',
       trust:['References the specific block’s own history, not a generic regional model','Shows the "why" the way a good agronomist would on a walk, not a black-box score','Fits inside the existing walk/phone routine, not a new app session','Endorsed or used by the grower’s own agronomist'],
       reject:['Generic advice that ignores known block-level variation','"Another platform to log into and enter data"','Recommendations that ignore cash-flow/labour constraints','Losing authorship over the decision'],
       journey:[
@@ -353,7 +358,7 @@
         structure:'Owner-operator + family labour, contract musterers/shearers at peak events. Advisor relationships likely distributed: vet, stock agent, group extension — not one recurring agronomist-equivalent',
         economics:'Avg beef farm cash income $238k (2022–23, a strong year) — but highly volatile: fell substantially in the 2023–24 drought before recovering. 3-yr average to 2024–25 sat just under the $155.3k long-run average (ABARES).'
       },
-      statFigure:'9.4%', statLabel:'Share of eligible wool levy payers who completed AWI’s flagship Lifetime Ewe Management training — a real ceiling on group-extension reach',
+      statFigure:'9.4%', statLabel:'Eligible wool levy payers who completed AWI’s flagship training — a real adoption ceiling',
       trust:['Property-specific rather than generic regional advice (by analogy with horticulture — not yet confirmed for this persona)','Low time cost, fitting the existing ute/phone routine','An identifiable, trusted human validator — though who that is remains unresolved'],
       reject:['Generic advice ignoring property-specific conditions','"Another platform to log into," especially after an abandoned grazing app','Anything that reduces perceived control over animal-welfare decisions'],
       journey:[
@@ -474,7 +479,6 @@
   // ---------------------------------------------------------------
   let currentPersona = 'horticulture';
   let currentStageId = 'monitor';
-  let matrixView = 'chart';
 
   const $ = (sel, el) => (el||document).querySelector(sel);
   const $all = (sel, el) => Array.from((el||document).querySelectorAll(sel));
@@ -502,20 +506,18 @@
       btn.className = 'persona-tab';
       btn.setAttribute('data-active', p.id === currentPersona ? 'true':'false');
       applyAccent(btn, p.accent);
-      btn.innerHTML = '<span class="pt-name">' + p.name + '</span><span class="pt-sub">' + p.sub + '</span>';
+      btn.innerHTML = '<span class="pt-name">' + p.name + '</span><span class="pt-sub">' + p.sub + '</span>' +
+        '<div class="pt-stat"><b>' + p.statFigure + '</b><span>' + p.statLabel + '</span></div>';
       btn.addEventListener('click', () => { currentPersona = p.id; currentStageId = PERSONAS[p.id].journey[1].id; renderAll(); });
       wrap.appendChild(btn);
     });
-    const p = PERSONAS[currentPersona];
-    const rs = $('#railStat');
-    applyAccent(rs, p.accent);
-    rs.innerHTML = '<div class="rs-label" style="margin-top:0;">' + p.statLabel + '</div><div class="rs-figure" style="color:var(--tab-accent-ink)">' + p.statFigure + '</div>';
   }
 
   function renderHero(){
     const p = PERSONAS[currentPersona];
     const hero = $('#personaHero');
     applyAccent(hero, p.accent);
+    hero.className = 'persona-hero';
     const s = p.snapshot;
     hero.innerHTML =
       '<div class="ph-top"><h2>' + p.name + '</h2><span class="persona-pill">' + p.sub + '</span></div>' +
@@ -534,16 +536,21 @@
   function renderSpine(){
     const p = PERSONAS[currentPersona];
     const spine = $('#spine');
-    applyAccent(spine, p.accent);
+    applyAccent($('#journeySection'), p.accent);
     spine.innerHTML = '';
     p.journey.forEach(stage => {
       const node = document.createElement('div');
       node.className = 'spine-node' + (stage.friction.length ? ' has-friction' : '');
-      node.innerHTML = '<div class="connector"></div>' +
+      node.innerHTML =
         '<button class="spine-btn" aria-pressed="' + (stage.id===currentStageId) + '">' +
           '<span class="spine-num"></span><span class="spine-label">' + stage.label + '</span>' +
         '</button>';
-      node.querySelector('.spine-btn').addEventListener('click', () => { currentStageId = stage.id; renderStageDetail(); $all('.spine-btn').forEach(b=>b.setAttribute('aria-pressed','false')); node.querySelector('.spine-btn').setAttribute('aria-pressed','true'); });
+      node.querySelector('.spine-btn').addEventListener('click', () => {
+        currentStageId = stage.id;
+        renderStageDetail();
+        $all('.spine-btn').forEach(b=>b.setAttribute('aria-pressed','false'));
+        node.querySelector('.spine-btn').setAttribute('aria-pressed','true');
+      });
       spine.appendChild(node);
     });
     renderStageDetail();
@@ -556,7 +563,7 @@
     applyAccent(wrap, p.accent);
     let html = '<h3>' + stage.label + '</h3><p class="desc">' + stage.desc + '</p>';
     if (stage.friction.length === 0){
-      html += '<p class="fi-text" style="color:var(--muted); font-style:italic;">No mapped friction point at this stage yet — not yet worth an opportunity card, or simply not researched.</p>';
+      html += '<p class="no-friction">No mapped friction point at this stage yet — not yet worth an opportunity card, or simply not researched.</p>';
     } else {
       stage.friction.forEach(f => {
         html += '<div class="friction-item"><div class="fi-row">' +
@@ -584,8 +591,7 @@
       const card = document.createElement('div');
       card.className = 'opp-card';
       card.innerHTML =
-        '<div class="oc-stage">' + o.stage + '</div>' +
-        '<h3>' + o.name + '</h3>' +
+        '<div class="opp-card-top"><div><div class="oc-stage">' + o.stage + '</div><h3>' + o.name + '</h3></div><span class="see-more">Details →</span></div>' +
         '<div class="oc-tags">' + o.tags.map(t=>'<span class="oc-tag">'+t+'</span>').join('') + '</div>' +
         '<p class="oc-problem">' + o.problem + '</p>' +
         '<div class="oc-foot"><span class="maturity-chip">' + o.maturity + '</span><span class="stars" title="Priority">' + '★'.repeat(sc.priority) + '<span style="color:var(--border-strong)">' + '★'.repeat(3-sc.priority) + '</span></span></div>';
@@ -601,7 +607,7 @@
     const modal = $('#modal');
     applyAccent(modal, p.accent);
     modal.innerHTML =
-      '<div class="modal-head"><div><h3>' + o.name + '</h3><div class="oc-stage" style="margin-top:4px;">' + p.name + ' · ' + o.stage + '</div></div><button class="modal-close" aria-label="Close">✕</button></div>' +
+      '<div class="modal-head"><div><h3>' + o.name + '</h3><div class="oc-stage" style="margin-top:5px;">' + p.name + ' · ' + o.stage + '</div></div><button class="modal-close" aria-label="Close">✕</button></div>' +
       '<div class="modal-meta"><span class="oc-tag">Maturity: ' + o.maturity + '</span>' + o.tags.map(t=>'<span class="oc-tag">'+t+'</span>').join('') + '</div>' +
       '<div class="modal-section"><h4>Problem</h4><p>' + o.problem + '</p></div>' +
       '<div class="modal-section"><h4>Current behaviour ' + confBadge(o.confidence) + '</h4><p>' + o.current + '</p></div>' +
@@ -631,7 +637,7 @@
 
   function renderChart(){
     const holder = $('#chartHolder');
-    const W = 640, H = 380, M = {top:16,right:24,bottom:44,left:120};
+    const W = 640, H = 380, M = {top:16,right:24,bottom:44,left:80};
     const plotW = W - M.left - M.right, plotH = H - M.top - M.bottom;
     const xScale = v => M.left + ((v-1)/4) * plotW;
     const yScale = v => M.top + (1-((v-1)/4)) * plotH;
@@ -654,7 +660,7 @@
     const gridH = [1,2,3,4,5].map(v => '<line x1="'+M.left+'" y1="'+yScale(v)+'" x2="'+(W-M.right)+'" y2="'+yScale(v)+'" stroke="var(--border)" stroke-width="1"/>').join('');
 
     holder.innerHTML =
-      '<div style="overflow-x:auto;"><svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" style="max-width:680px; display:block; margin-top:6px;" role="img" aria-label="Opportunity matrix: farmer value against adoption likelihood">' +
+      '<div style="overflow-x:auto;"><svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" style="max-width:640px; display:block; margin-top:6px;" role="img" aria-label="Opportunity matrix: farmer value against adoption likelihood">' +
         gridV + gridH +
         '<line x1="'+M.left+'" y1="'+M.top+'" x2="'+M.left+'" y2="'+(H-M.bottom)+'" stroke="var(--border-strong)" stroke-width="1.5"/>' +
         '<line x1="'+M.left+'" y1="'+(H-M.bottom)+'" x2="'+(W-M.right)+'" y2="'+(H-M.bottom)+'" stroke="var(--border-strong)" stroke-width="1.5"/>' +
@@ -699,8 +705,8 @@
     $('#flowStrip').innerHTML = FLOW.map(f => '<div class="flow-step"><div class="fs-n">STEP ' + f.n + '</div><div class="fs-t">' + f.t + '</div><div class="fs-d">' + f.d + '</div></div>').join('');
   }
 
-  $('#viewChartBtn').addEventListener('click', () => { matrixView='chart'; $('#viewChartBtn').setAttribute('aria-pressed','true'); $('#viewTableBtn').setAttribute('aria-pressed','false'); $('#chartHolder').style.display='block'; $('#tableHolder').style.display='none'; });
-  $('#viewTableBtn').addEventListener('click', () => { matrixView='table'; $('#viewTableBtn').setAttribute('aria-pressed','true'); $('#viewChartBtn').setAttribute('aria-pressed','false'); $('#tableHolder').style.display='block'; $('#chartHolder').style.display='none'; });
+  $('#viewChartBtn').addEventListener('click', () => { $('#viewChartBtn').setAttribute('aria-pressed','true'); $('#viewTableBtn').setAttribute('aria-pressed','false'); $('#chartHolder').style.display='block'; $('#tableHolder').style.display='none'; });
+  $('#viewTableBtn').addEventListener('click', () => { $('#viewTableBtn').setAttribute('aria-pressed','true'); $('#viewChartBtn').setAttribute('aria-pressed','false'); $('#tableHolder').style.display='block'; $('#chartHolder').style.display='none'; });
 
   function renderAll(){
     renderPersonaTabs();
