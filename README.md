@@ -12,6 +12,14 @@ It is explicitly **not** a recommendation engine, a farm-management SaaS, or a
 sales tool for a specific agtech product. It's a discovery and sense-making layer:
 persona-driven, journey-based, economics-aware.
 
+**Note on current state**: this repo today is entirely manual — markdown
+files written by an AI assistant in conversation with a human, versioned
+in git, with no database or UI. See `PROCESS.md` for exactly how that
+process runs end-to-end right now and what a real platform would need to
+take over from it. `research/persona-build-flow.md` is the more detailed
+content pipeline used within each persona (desk research → persona →
+journey → opportunity cards → matrix → simulated interview → feedback).
+
 ## Working definition of "AI adoption" for this project
 
 Adoption is not "a farmer uses an AI tool." It's a multi-stage shift in how a farm
