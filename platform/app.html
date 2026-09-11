@@ -23,54 +23,13 @@
     --radius:10px;
     color-scheme: light;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#161a12;
-      --surface:#1e2418;
-      --surface-2:#232a1c;
-      --ink:#e9ebdd;
-      --ink-2:#c9cdb8;
-      --muted:#98a389;
-      --border:#333c29;
-      --border-strong:#48533a;
-      --accent-hort:#1d9aab;
-      --accent-hort-ink:#7fd7e2;
-      --accent-hort-tint:#12333a;
-      --accent-live:#d46b2a;
-      --accent-live-ink:#f0aa78;
-      --accent-live-tint:#3a2716;
-      --flag:#d1ad4c;
-      --flag-tint:#39301a;
-      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#161a12;
-    --surface:#1e2418;
-    --surface-2:#232a1c;
-    --ink:#e9ebdd;
-    --ink-2:#c9cdb8;
-    --muted:#98a389;
-    --border:#333c29;
-    --border-strong:#48533a;
-    --accent-hort:#1d9aab;
-    --accent-hort-ink:#7fd7e2;
-    --accent-hort-tint:#12333a;
-    --accent-live:#d46b2a;
-    --accent-live-ink:#f0aa78;
-    --accent-live-tint:#3a2716;
-    --flag:#d1ad4c;
-    --flag-tint:#39301a;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -8px rgba(0,0,0,.5);
-  }
+  /* Deliberately single-theme: a professional, high-contrast light page,
+     regardless of the viewer's system/browser dark-mode setting. */
 
   *{box-sizing:border-box;}
   html{background:var(--bg);}
   body{
     background-color:var(--bg);
-    background-image:
-      radial-gradient(1400px 700px at 50% -12%, color-mix(in srgb, var(--surface) 55%, transparent), transparent 65%);
-    background-attachment:fixed;
     color:var(--ink); font-family:'Source Sans 3', system-ui, sans-serif; line-height:1.5;
   }
   h1,h2,h3,h4{font-family:'Source Serif 4', Georgia, serif; font-weight:600; text-wrap:balance; color:var(--ink); margin:0;}
