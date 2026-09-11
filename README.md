@@ -259,8 +259,25 @@ workflow design → adoption case → commercial case.
                    escalation, or human-in-the-loop review
 /matrix/         - cross-opportunity prioritisation matrices, one per commodity
                    plus an eventual cross-commodity roll-up
-/research/       - interview guide, source log, RDC/AgriFutures material
+/research/       - interview guide, source log, RDC/AgriFutures material,
+                   and research/interviews/ for simulated (and eventually
+                   real) grower interview transcripts
 ```
+
+## Simulated interviews (until real grower access exists)
+
+We don't yet have real growers to interview. Rather than leave every
+persona's `[VALIDATE]` tags as indefinite guesses, this project uses
+AI-simulated interviews as a hypothesis-sharpening tool — see
+`research/simulated-interview-methodology.md` for the full method, and
+`research/interviews/` for transcripts (each clearly banner-marked as
+simulated, not real). **A simulated interview is not evidence** — it
+ranks below secondary/commentary in the confidence key in
+`research/sources.md` and exists only to turn a vague `[VALIDATE]` guess
+into a specific, testable hypothesis for the first real interview to
+confirm or overturn. This method is itself a direct application of the
+project's founding thesis: using AI to do situational analysis of farmer
+behaviour as a complement to (never a replacement for) real interviews.
 
 ## Sourcing discipline
 

@@ -208,6 +208,17 @@ which is a different kind of AI opportunity (interpretation/personalisation
 of general knowledge) than the horticulture persona's
 "extend-the-agronomist" framing.
 
+**Simulated-interview signal (not confirmed — see
+`research/interviews/livestock-grazier-simulated-01.md`, Simulated/synthetic
+tier):** the distributed-advisor hypothesis held up, but with the **stock
+agent as the closest single analogue**, specifically for sale-timing
+decisions — vet for animal health, group extension for general practice,
+agent for anything market/sale-related, no one role covering all of it.
+The simulated agent also named a concrete gap: poor visibility into the
+grazier's actual feed position when advising on sale timing. Still needs a
+real interview to confirm or overturn — a different real grazier could
+easily name a vet, accountant, or neighbour instead.
+
 ## Open questions for real interviews
 
 1. Who is this grazier's most trusted source of property-specific advice

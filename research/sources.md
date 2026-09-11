@@ -11,6 +11,10 @@ Confidence key:
   on scope and intent, less reliable on specific on-farm behaviour claims.
 - **Secondary/commentary** — news, blog, or vendor commentary; useful for
   framing and leads, not for hard numbers.
+- **Simulated (synthetic)** — an AI-generated transcript (see
+  `research/simulated-interview-methodology.md`), not a real person.
+  Ranks below secondary/commentary. Every claim is a hypothesis to
+  validate in a real interview, never evidence on its own.
 
 ---
 

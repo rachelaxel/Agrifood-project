@@ -37,6 +37,19 @@ something that also books/coordinates the sale itself.
 likely a cross-check on the AI's read of the market — this opportunity
 supports the grower's own decision, not the agent relationship, and
 shouldn't be framed as a replacement for the agent's role.
+**Simulated-interview signal** (see
+`research/interviews/livestock-grazier-simulated-01.md`, not confirmed):
+the stock agent may be the closest thing this persona has to
+horticulture's agronomist, but specifically for sale/market matters — so
+this opportunity should be framed as *extending the agent relationship*
+(similar in spirit to the horticulture pest-detection card's "extends the
+agronomist" framing), not as a generic decision-support tool competing
+with it. The simulated agent also named a concrete gap worth designing
+around directly: **poor visibility into the grazier's own feed position**
+when advising on timing — suggesting the AI intervention may need to
+combine the grazier's feed/pasture data with market data *for the agent's
+benefit as much as the grower's*, not just present a recommendation to the
+grower alone.
 
 **Adoption barrier — farmer**: This is arguably the single
 highest-stakes, most consequence-loaded decision in the persona's year
@@ -85,6 +98,14 @@ Atlas Grazing, Farming Forecaster — see `research/sources.md`) already
 address adjacent pasture/feed-budgeting decision support, so there may be
 existing products to learn from (or partner with) rather than building
 from zero.
+
+**Related opportunity (not yet its own card)**: the simulated interview
+suggests the sale-timing decision and a feed-availability/procurement
+decision may not be separable in practice — the grazier reported holding
+both in his head simultaneously and losing track of one while working the
+other. If a real interview confirms this, the scope of this card may need
+to expand to include feed-position data directly rather than assuming
+sale-timing is a standalone decision.
 
 **Sources**: ABARES Financial performance of livestock farms (income
 volatility grounding the stakes claim); commercial grazing tools as
