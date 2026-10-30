@@ -20,6 +20,18 @@ take over from it. `research/persona-build-flow.md` is the more detailed
 content pipeline used within each persona (desk research → persona →
 journey → opportunity cards → matrix → simulated interview → feedback).
 
+`platform/farm-os.html` is a separate, standalone prototype: a farm
+operating system for an invented livestock persona (Dave & Kerry Marsh,
+beef breeder-backgrounders near Roma, QLD, extended from
+`research/interviews/livestock-grazier-simulated-01.md`). The farmer's own
+records go in (herd, paddock check-ins, costs, sales, NLIS/LPA, clearing,
+prices), and a transparent rules layer flags where there's profit to be
+made, where a required standard isn't being met, and where the market is
+heading. Every flag shows which data it used and how fresh that data is,
+following the RAD-AI principle that "AI is what it eats". All thresholds and
+emission factors are illustrative and editable. Data is saved in the browser
+only (with a JSON export).
+
 ## Working definition of "AI adoption" for this project
 
 Adoption is not "a farmer uses an AI tool." It's a multi-stage shift in how a farm
